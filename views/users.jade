@@ -1,0 +1,18 @@
+<html> 
+<head> 
+</head>
+h2 Editar Datos 
+<form method="post" action="/listar" name="form" >
+p Id:<input type="text" name="id" value=#{id}>
+p Nombre:<input type="text" name="username" value=#{username}>
+p Apellido:<input type="text" name="apellido" value=#{apellido}>
+p C.I:<input type="text" name="ci" value=#{ci}>
+p Fecha Nacimiento:<input type="date" name="nac" value=#{nac}>
+p Empresa:<input type="text" name="empresa" value=#{empresa}>
+p Departamento:<input type="text" name="dpto" value=#{dpto}>
+p Acceso:<input type="checkbox" name="acceso" #{acceso}>
+<input type="hidden" name="huella" value=#{huella}>
+p <input type="submit" id="grabar" name="grabar" value="grabar"> <input type="reset">
+</form>
+
+

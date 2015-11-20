@@ -1,0 +1,40 @@
+<form method="post" action="/users">
+<table border="solid">
+h2 Lista Empleados
+p #{nombre2}
+p  Filtrar por fecha de modificacion <input type="date" name="desde"/> hasta <input type="date" name="hasta"/> &nbsp; <input type=image src="buscar.png" width="30" height="30" text="buscar" name="buscar" value="buscar" />
+br
+tr
+   td <h4> ID
+   td <h4> Nombre 
+   td <h4> Apellido
+   td <h4> Cedula
+   td <h4>fechanac
+   td <h4>Departamento
+   td <h4>Acceso
+   td <h4>Opciones
+tr
+- for (var x = 0; x < max; x++)
+   <td> #{vector[x+1].id} 
+   <td> #{vector[x+1].nombre} 
+   <td> #{vector[x+1].apellido}
+   <td> #{vector[x+1].ci}
+   <td> #{vector[x+1].fechanac}
+   <td> #{vector[x+1].dpto}
+   <td> <input type="checkbox" name="acceso"  #{vector[x+1].acceso} disabled />
+   <td> <input type=image src="editar.gif" width="30" height="30" text="editar" name="editar" value=#{vector[x+1].id} />
+   <input type=image src="borrar.png" width="30" height="30" text="borrar" name="borrar" value=#{vector[x+1].id} />
+   <input type=image src="actualizar.png" width="30" height="30" text="actualizar" name="actualizar" value="actualizar" />
+   <input type="hidden" name="id" value=#{vector[x+1].id} /> 
+   <input type="hidden" name="username" value=#{vector[x+1].nombre} />
+   <input type="hidden" name="apellido" value=#{vector[x+1].apellido} />
+   <input type="hidden" name="ci" value=#{vector[x+1].ci}/>
+   <input type="hidden" name="nac" value=#{vector[x+1].fechanac}/>
+   <input type="hidden" name="empresa" value=#{empresa}/>
+   <input type="hidden" name="dpto" value={vector[x+1].dpto}/>
+   <input type="hidden" name="huella" value="huella"/>
+   <input type="hidden" name="acceso" value=#{vector[x+1].acceso}> 
+   tr
+</table>
+</form>
+
