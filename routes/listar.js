@@ -13,8 +13,8 @@ var x=0;
 var max=0;
 	db.serialize(function () {
 		db.run('create table if not exists personal (_id INTEGER PRIMARY KEY AUTOINCREMENT, idusuario TEXT , nombre TEXT , apellido TEXT , cedula TEXT , fechanac TEXT , empresa TEXT , dpto TEXT , acceso TEXT , huella TEXT )');
-		select();
-		function select(){
+		//select();
+		function select(callback){
 		db.each("SELECT _id AS id,* FROM personal",
 			function (err, row) {
 				var onoff = boleano2(row.acceso);
@@ -30,6 +30,7 @@ var max=0;
 					acceso:boleano2(row.acceso)
 				};	
 			});
+			callback();
 			max=x
 			x=0
 		}
@@ -70,7 +71,7 @@ router.post('/', function (req, res) {
 	
 	
 		if (req.body.iniciar === 'iniciar') {
-			select(function(){console.log('nuevo')})
+	//		select(function(){console.log('nuevo')})
 		}
 	
 	db.serialize(function () {
@@ -83,7 +84,7 @@ router.post('/', function (req, res) {
 			insertar.run(id, idusu, nombre, apellido, ci, fechanac, empresa, dpto, acceso, huella);
 			insertar.finalize();
 			nombre2="Usuario"+" "+nombre+" "+apellido+" "+"Actualizado"
-			select()
+	//		select()
 	
 			
 		};
@@ -93,15 +94,17 @@ router.post('/', function (req, res) {
 			borrar.run(id);
 			borrar.finalize();
 			nombre2="Usuario"+" "+nombre+" "+apellido+" "+"Eliminado"
-			select()
+	//		select()
 			
 	
 		};
 	});
 
 	console.log('res')
+	select(function(){
 	res.render(__dirname + '/../views/lista', {vector:database,max:max,nombre2:nombre2});
 	})
+})
 });
 
 function boleano(valor) {
