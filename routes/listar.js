@@ -1,40 +1,65 @@
 var express = require('express');
+var ejs=require('ejs')
 var router = express();
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('personal.db');
+var login = new sqlite3.Database('./database/Usuarios.sqlite');
 var fecha = require('./fecha.js');
 var fs = require('fs')
 var database = [];
-var nombre2=""
-var async = require("async");
-//var vector = [];
-var i=0;
-var x=0;
-var max=0;
+var nombre2 = ""
+var pjson = require('../package.json');
+var i = 0;
+ var c=0
+var x = 0;
+var hasta2=""
+var max = 0;
+router.post('/', function (req, res) {
+	var user=req.body.user
+	var password=req.body.password
+	console.log(user+password)
+login.serialize(function () {
+	login.each("SELECT rowid AS rowid,* FROM users WHERE user = $useraux",
+	{ $useraux: user },
+		function (err, row) {
+			if (row.user===user){
+			if (row.password===password){
+				validado()
+			}else{
+				novalidado()
+			}
+			}
+		},function(err,rows){
+				if (rows===0){
+					novalidado()
+				}
+			})
+		//login.close();
+});
+//validado()
+function validado(){
+	var ruta="./database/"+user+"/personal.db"
+
+	console.log(ruta)
+	var db = new sqlite3.Database(ruta);
+	//select()
+	function select(callback){
 	db.serialize(function () {
 		db.run('create table if not exists personal (_id INTEGER PRIMARY KEY AUTOINCREMENT, idusuario TEXT , nombre TEXT , apellido TEXT , cedula TEXT , fechanac TEXT , empresa TEXT , dpto TEXT , acceso TEXT , huella TEXT )');
-		//select();
-		function select(callback){
-		db.each("SELECT _id AS id,* FROM personal",
-			function (err, row) {
-				var onoff = boleano2(row.acceso);
-				x++
-				 database[x]={
-					id:row.id,
-					nombre:row.nombre,
-					apellido:row.apellido,
-					ci:row.cedula,
-					fechanac:row.fechanac,
-					dpto:row.dpto,
-					idusu:row.idusu,
-					acceso:boleano2(row.acceso)
-				};	
+		//var database = [];
+		console.log('res')
+		db.all("SELECT _id AS id,* FROM personal",
+			function (err, rows) {
+database=rows
+max = (database.length)
+callback()
 			});
-			callback();
-			max=x
-			x=0
-		}
-router.post('/', function (req, res) {
+		//enviar();
+		x = 0
+			
+		
+	})
+	}
+
 	console.log('normal')
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
@@ -45,67 +70,142 @@ router.post('/', function (req, res) {
 	var empresa = req.body.empresa;
 	var dpto = req.body.dpto;
 	var acceso = boleano(req.body.acceso);
-	var huella=req.body.huella;
+	var huella;
+	//= req.body.huella;
+if (req.body.cancelar === 'Cancelar') {
+	nombre2="Operacion Cancelada"
+}
+	if (req.body.Exportar === 'Exportar') {
+		//var ruta2="'./database/"+user+"/exportar.db'"
+		//console.log(ruta2)
+	//	var exportar = new sqlite3.Database(ruta2);
+		var desde = req.body.desde;
+		var hasta = req.body.hasta;
 	
-	
-	if (req.body.exportar === 'exportar') {
-		select()
-		var desdepar= req.body.desdepar;
-		var hastapar= req.body.hastapar;
-		console.log(desdepar)
-		console.log(hastapar)
-   for (var x = desdepar; x <= hastapar; x++){
-	  // i++
-	//   	fs.appendFile('./database.txt',database[i].id+','+database[i].nombre+','+database[i].apellido+','+database[i].ci+'\r\n', function (err) {
-        //    if (err) {
-          //      console.log('error');
-           // }});
-		   //hay que hacer select por fecha
-   }	
-		nombre2="Se ha exportado el archivo"
-		x=0;
-		i=0;
-	}
-	
-	
-	
-	
-		if (req.body.iniciar === 'iniciar') {
-	//		select(function(){console.log('nuevo')})
+		if (desde>hasta){
+			nombre2="Fecha inicial no puede ser mayor que fecha final"
+		};
+		
+		function suma1(){
+			var dates=new Date(hasta)
+			return dates.getFullYear() + "-" + cero((dates.getMonth() + 1)) + "-" + cero((dates.getDate() +1));
+			
 		}
+		
+		if (hasta>=desde && req.body.formato==="txt"){
+			 hasta2=suma1(hasta)
+
+			c=0
+			var ruta2="./database/"+user+"/database.txt"
+	 for (var x = 0; x < max; x++){
+		 if(database[x].idusuario>=desde && hasta2>=database[x].idusuario){
+			 c=c+1	 
+	fs.appendFile(ruta2,database[x]._id+","+database[x].idusuario+","+database[x].nombre+","+database[x].apellido+","+database[x].cedula+","+database[x].fechanac+","+database[x].empresa+","+database[x].dpto+","+database[x].acceso+","+database[x].huella+'\r\n', function (err) {
+    if (err) {
+    c=0
+    console.log('error');
+        }});
+			 
+		 }}   
+		 nombre2=c+" Dato(s) exportados en .Txt"
+		 }
+			 if(hasta>=desde && req.body.formato==="Db"){ 
+				 hasta2=suma1(hasta)
+			  c=0;
+			  var ruta3="./database/"+user+"/exportados.db"
+			  var exporta = new sqlite3.Database(ruta3);
+			   exporta.serialize(function () {
+			   exporta.run('drop table if exists personal')
+			   exporta.run('create table if not exists personal (_id INTEGER PRIMARY KEY AUTOINCREMENT, idusuario TEXT , nombre TEXT , apellido TEXT , cedula TEXT , fechanac TEXT , empresa TEXT , dpto TEXT , acceso TEXT , huella TEXT )');
+			   var insertar = exporta.prepare("INSERT INTO personal VALUES (?,?,?,?,?,?,?,?,?,?)");
+			   for (var x = 0; x < max; x++){
+		    if(database[x].idusuario>=desde && hasta2>=database[x].idusuario){
+		     c=c+1
+			insertar.run(database[x]._id,database[x].idusuario,database[x].nombre, database[x].apellido, database[x].cedula, database[x].fechanac, database[x].empresa, database[x].dpto,database[x].acceso,database[x].huella);
+		 }    
+			   } insertar.finalize();
+			    nombre2=c+" Dato(s) exportados en .Db" 
+				   
+		 
+					   
+			    });
+			 }
+
+
+		x = 0;
+		max = 0
+	}
+
+
+	if (req.body.iniciar === 'iniciar') {
+	//	select();
+		nombre2="Bienvenido "+user
+	}
+
 	
-	db.serialize(function () {
-		if (req.body.grabar === 'grabar') {
+		if (req.body.grabar === 'Grabar') {
 			console.log('grabar')
+			db.each("SELECT _id AS _id,huella FROM personal WHERE _id = $useraux",
+	{ $useraux: id },
+		function (err, row) {
+			huella=row.huella
+			},function (err,rows){
+				if(rows!=0){
+					insert()
+				}
+			})
+			function insert(){
 			var borrar = db.prepare("DELETE FROM personal WHERE _id=(?)");
 			borrar.run(id);
 			borrar.finalize();
+			if (huella==="Sin Enrolar"||huella===null){
+				huella="Sin Enrolar"
+			}
 			var insertar = db.prepare("INSERT INTO personal VALUES (?,?,?,?,?,?,?,?,?,?)");
 			insertar.run(id, idusu, nombre, apellido, ci, fechanac, empresa, dpto, acceso, huella);
 			insertar.finalize();
-			nombre2="Usuario"+" "+nombre+" "+apellido+" "+"Actualizado"
+			nombre2 = "Usuario" + " " + nombre + " " + apellido + " " + "Actualizado"
 	//		select()
-	
-			
+			}
 		};
-		if (req.body.borrar === 'borrar') {
+		if (req.body.borrar === 'Eliminar') {
 			console.log('borrar')
 			var borrar = db.prepare("DELETE FROM personal WHERE _id=(?)");
 			borrar.run(id);
 			borrar.finalize();
-			nombre2="Usuario"+" "+nombre+" "+apellido+" "+"Eliminado"
-	//		select()
-			
-	
-		};
-	});
+	//		select();
+			nombre2 = "Usuario" + " " + nombre + " " + apellido + " " + "Eliminado"
 
-	console.log('res')
+		};
+//function enviar(){
+
+//console.log(x)
+//if (x=max-1){
+//	x=0
+//if(max!=0){
 	select(function(){
-	res.render(__dirname + '/../views/lista', {vector:database,max:max,nombre2:nombre2});
-	})
+		
+	res.render(__dirname + '/../views/lista', { vector: database, max: max, nombre2: nombre2, user: user,password:password,version:pjson.version,fecha:fecha()})
+nombre2="";
 })
-});
+	
+//}
+}
+function novalidado(){
+router.engine('html', ejs.__express);
+res.render('index.html',{title:"Usuario o contraseña no valida, intente nuevamente"});
+
+}
+
+})
+ function cero(date) {
+        if (date < 10) {
+            return ("0" + date);
+        }
+        else {
+            return date;
+        }
+    }
 
 function boleano(valor) {
 	if (valor === "on") {
@@ -122,6 +222,8 @@ function boleano2(valor) {
 		return ("")
 	}
 }
+
+
 
 module.exports = router;
 

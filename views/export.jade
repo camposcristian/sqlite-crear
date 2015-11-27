@@ -1,15 +1,40 @@
 <html> 
 <head> 
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/layout.css">
 </head>
-h3 ¿Exportar desde #{desde} hasta #{hasta}? 
+<body class="cuerpo">
+<div class="container">
+<div class="form-bg2">
 <form method="post" action="/listar" name="form" >
-p Selecciona formato:
+<br>
+<p class="borrar"> Exportar por fecha</p>
 br
-p<input type="radio" name="formato1" value"txt" checked/> .txt
-p<input type="radio" name="formato2" value"db"> .db
-<input type="submit" value="exportar" id="exportar"name="exportar" />
-<input type="hidden" name="desdepar" value=#{desdepar}/>
-<input type="hidden" name="hastapar" value=#{hastapar}/>
+br
+br
+<div class="textoeditar2">
+<p class="margen2">Desde:<input type="date" name="desde" value=#{fecha} class="cidata"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hasta:<input type="date" name="hasta" value=#{fecha} class="cidata"/></p>
+<input type="hidden" name="user" value=#{user}>
+<input type="hidden" name="password" value=#{password}>
+br
+br
+br
+br
+<fieldset>
+<legend>Elige un Formato</legend>
+<label>
+<input type="radio" name="formato" value="txt"  checked="checked"/> Txt
+</label>
+<label>
+<input type="radio" name="formato" value="Db"> Db
+</label>
+</fieldset>
+br
+br
+br
+br
+<p class="margen"> <input type="submit" id="Exportar" name="Exportar" value="Exportar" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" id="cancelar"name="cancelar" class="btn" /></p>
+
 </form>
 
 

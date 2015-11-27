@@ -1,18 +1,29 @@
 <html> 
 <head> 
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/layout.css">
 </head>
-h2 Editar Datos 
+<body class="cuerpo">
+<div class="container">
+<div class="form-bg2">
 <form method="post" action="/listar" name="form" >
-p Id:<input type="text" name="id" value=#{id}>
-p Nombre:<input type="text" name="username" value=#{username}>
-p Apellido:<input type="text" name="apellido" value=#{apellido}>
-p C.I:<input type="text" name="ci" value=#{ci}>
-p Fecha Nacimiento:<input type="date" name="nac" value=#{nac}>
-p Empresa:<input type="text" name="empresa" value=#{empresa}>
-p Departamento:<input type="text" name="dpto" value=#{dpto}>
+<br>
+<p class="borrar"> Editar datos de Empleado</p>
+br
+<div class="textoeditar">
+p Id:<input type="text" name="id" value=#{id} class="iddata" disabled/>
+p Nombre:<input type="text" name="username" value=#{username} maxlength="20"; class="nomdata"/>
+p Apellido:<input type="text" name="apellido" value=#{apellido} maxlength="20"; class="nomdata">
+p C.I:<input type="text" name="ci" value=#{ci} maxlength="16" class="cidata"/>
+p Fecha Nacimiento:<input type="date" name="nac" value=#{nac} class="cidata"/>
+p Empresa:<input type="text" name="empresa" value=#{empresa} maxlength="20" class="cidata"/>
+p Departamento:<input type="text" name="dpto" value=#{dpto} maxlength="20" class="cidata"/>
 p Acceso:<input type="checkbox" name="acceso" #{acceso}>
-<input type="hidden" name="huella" value=#{huella}>
-p <input type="submit" id="grabar" name="grabar" value="grabar"> <input type="reset">
+<input type="hidden" name="user" value=#{user}>
+<input type="hidden" name="password" value=#{password}>
+<input type="hidden" name="id" value=#{id}>
+br
+p <input type="submit" id="grabar" name="grabar" value="Grabar" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" id="cancelar"name="cancelar" class="btn"/>
 </form>
 
 

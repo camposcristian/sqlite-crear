@@ -1,40 +1,79 @@
-<form method="post" action="/users">
-<table border="solid">
-h2 Lista Empleados
-p #{nombre2}
-p  Filtrar por fecha de modificacion <input type="date" name="desde"/> hasta <input type="date" name="hasta"/> &nbsp; <input type=image src="buscar.png" width="30" height="30" text="buscar" name="buscar" value="buscar" />
+
+head 
+ <!-- Stylesheets -->
+ <link rel="stylesheet" href="css/layout.css">
+ <form method="post" action="/users">
+<body class="cuerpo">
+<div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<input type="submit" name="Cerrar" id="Cerrar" value="Cerrar Sesion" class="enlace2" /> </div>
+<div class="imag"><img class="logo" src="../images/logocrear2.png">
+<p class="info">
 br
+</div>
+br
+br
+br 
+br
+<div class="informe2"> <p class="informetext">#{nombre2}</p></div>
+p  <input type="hidden" name="user" value=#{user}>
+p  <input type="hidden" name="password" value=#{password}>
+
+<table class="tabla" border="solid">
 tr
-   td <h4> ID
-   td <h4> Nombre 
-   td <h4> Apellido
-   td <h4> Cedula
-   td <h4>fechanac
-   td <h4>Departamento
-   td <h4>Acceso
-   td <h4>Opciones
+  <td class="id"> <h4> ID
+  td <h4> Nombre 
+  td <h4> Apellido
+  td <h4> Cedula
+  <td class="fecha">  <h4>fechanac
+  <td class="opciones"> <h4> Empresa
+  td <h4>Departamento
+  <td class="fecha">  <h4>Modificado
+  <td class="id"> <h4>Acceso
+  <td class="id"><h4>Huella
+  <td class="opciones"><h4>Opciones
+
 tr
 - for (var x = 0; x < max; x++)
-   <td> #{vector[x+1].id} 
-   <td> #{vector[x+1].nombre} 
-   <td> #{vector[x+1].apellido}
-   <td> #{vector[x+1].ci}
-   <td> #{vector[x+1].fechanac}
-   <td> #{vector[x+1].dpto}
-   <td> <input type="checkbox" name="acceso"  #{vector[x+1].acceso} disabled />
-   <td> <input type=image src="editar.gif" width="30" height="30" text="editar" name="editar" value=#{vector[x+1].id} />
-   <input type=image src="borrar.png" width="30" height="30" text="borrar" name="borrar" value=#{vector[x+1].id} />
-   <input type=image src="actualizar.png" width="30" height="30" text="actualizar" name="actualizar" value="actualizar" />
-   <input type="hidden" name="id" value=#{vector[x+1].id} /> 
-   <input type="hidden" name="username" value=#{vector[x+1].nombre} />
-   <input type="hidden" name="apellido" value=#{vector[x+1].apellido} />
-   <input type="hidden" name="ci" value=#{vector[x+1].ci}/>
-   <input type="hidden" name="nac" value=#{vector[x+1].fechanac}/>
+   <td class="id"> #{vector[x].id} 
+   <td> #{vector[x].nombre} 
+   <td> #{vector[x].apellido}
+   <td> #{vector[x].cedula}
+   <td class="fecha">  #{vector[x].fechanac}
+   <td class="opciones"> #{vector[x].empresa}
+   <td> #{vector[x].dpto}   
+   <td class="fecha">  #{vector[x].idusuario}
+   
+   if vector[x].acceso == "true"
+        <td class="id"> <input type="checkbox" name="acceso" checked="true" disabled /> 
+   else
+        <td class="id"> <input type="checkbox" name="acceso"  disabled /> 
+   if vector[x].huella===null||vector[x].huella==="Sin Enrolar"
+        <td class="id"> 
+   else
+        <td class="id"> <img src="huellacla.png" width="15" height="20" name="acceso"/>
+        
+   <td class="id"> <input type=image src="editarcla.png" width="20" height="20" text="editar" name="editar" value=#{vector[x].id} />  &nbsp;
+   <input type=image src="borrarcla.png" width="20" height="20" text="borrar" name="borrar" value=#{vector[x].id} />&nbsp;
+   <a href="javascript:document.location.reload();"><img src="actualizarcla.png" width="20" height="20" text="actualizar" name="actualizar" />
+   <input type="hidden" name="id" value=#{vector[x].id} /> 
+   <input type="hidden" name="username" value=#{vector[x].nombre} />
+   <input type="hidden" name="apellido" value=#{vector[x].apellido} />
+   <input type="hidden" name="ci" value=#{vector[x].cedula}/>
+   <input type="hidden" name="nac" value=#{vector[x].fechanac}/>
    <input type="hidden" name="empresa" value=#{empresa}/>
-   <input type="hidden" name="dpto" value={vector[x+1].dpto}/>
-   <input type="hidden" name="huella" value="huella"/>
-   <input type="hidden" name="acceso" value=#{vector[x+1].acceso}> 
-   tr
+   <input type="hidden" name="dpto" value={vector[x].dpto}/>
+   <input type="hidden" name="acceso" value=#{vector[x].acceso}> 
+   
+   if (x%2)==0
+    <tr class="par">   
+   else 
+    tr
 </table>
+<p class="bienvenido"> Version: #{version}
 </form>
+<!-- JS  -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+<script>window.jQuery || document.write("<script src='js/jquery-1.5.1.min.js'>\x3C/script>")</script>
+<script src="js/app.js"></script>
+<!-- End Document -->
+
 
