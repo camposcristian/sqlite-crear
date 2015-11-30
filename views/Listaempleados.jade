@@ -1,0 +1,80 @@
+
+head 
+ <!-- Stylesheets -->
+ <link rel="stylesheet" href="css/layout.css">
+ <form method="post" action="/users">
+<body class="cuerpo">
+<div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<input type="submit" name="Cerrar" id="Cerrar" value="Cerrar Sesion" class="enlace2" /> </div>
+<div class="imag"><img class="logo" src="../images/logocrear2.png">
+<p class="info">
+br
+</div>
+br
+br
+br 
+br
+br
+<div class="informe2"> <p class="informetext">#{nombre2}</p></div>
+p  <input type="hidden" name="user" value=#{user}>
+p  <input type="hidden" name="password" value=#{password}>
+
+<table class="tabla" border="solid">
+tr
+  <td class="id"> <h4> ID
+  td <h4> Nombre 
+  td <h4> Apellido
+  td <h4> Cedula
+  <td class="fecha">  <h4>fechanac
+  <td class="opciones"> <h4> Empresa
+  td <h4>Departamento
+  <td class="fecha">  <h4>Modificado
+  <td class="id"> <h4>Acceso
+  <td class="id"><h4>Huella
+  <td class="opciones"><h4>Opciones
+
+tr
+- for (var x = 0; x < max; x++)
+   <td class="id"> #{vector[x].id} 
+   <td> #{vector[x].nombre} 
+   <td> #{vector[x].apellido}
+   <td> #{vector[x].cedula}
+   <td class="fecha">  #{vector[x].fechanac}
+   <td class="opciones"> #{vector[x].empresa}
+   <td> #{vector[x].dpto}   
+   <td class="fecha">  #{vector[x].idusuario}
+   
+   if vector[x].acceso == "true"
+        <td class="id"> <input type="checkbox" name="acceso" checked="true" disabled /> 
+   else
+        <td class="id"> <input type="checkbox" name="acceso"  disabled /> 
+   if vector[x].huella===null||vector[x].huella==="Sin Enrolar"
+        <td class="id"> 
+   else
+        <td class="id"> <img src="../images/huellacla.png" width="15" height="20" name="acceso"/>
+        
+   <td class="id"> <input type=image src="../images/editarcla.png" width="20" height="20" text="editar" name="editar" value=#{vector[x].id} />  &nbsp;
+   <input type=image src="../images/borrarcla.png" width="20" height="20" text="borrar" name="borrar" value=#{vector[x].id} />&nbsp;
+   <a href="javascript:document.location.reload();"><img src="../images/actualizarcla.png" width="20" height="20" text="actualizar" name="actualizar" />
+   <input type="hidden" name="id" value=#{vector[x].id} /> 
+   <input type="hidden" name="username" value=#{vector[x].nombre} />
+   <input type="hidden" name="apellido" value=#{vector[x].apellido} />
+   <input type="hidden" name="ci" value=#{vector[x].cedula}/>
+   <input type="hidden" name="nac" value=#{vector[x].fechanac}/>
+   <input type="hidden" name="empresa" value=#{empresa}/>
+   <input type="hidden" name="dpto" value={vector[x].dpto}/>
+   <input type="hidden" name="acceso" value=#{vector[x].acceso}> 
+   
+   if (x%2)==0
+    <tr class="par">   
+   else 
+    tr
+</table>
+<p class="bienvenido"> Version: #{version}
+</form>
+<!-- JS  -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+<script>window.jQuery || document.write("<script src='js/jquery-1.5.1.min.js'>\x3C/script>")</script>
+<script src="js/app.js"></script>
+<!-- End Document -->
+
+
