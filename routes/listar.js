@@ -137,7 +137,7 @@ if (req.body.cancelar === 'Cancelar') {
 	}
 
 
-	if (req.body.iniciar === 'iniciar') {
+	if (req.body.iniciar === 'Iniciar') {
 	//	select();
 		nombre2="Bienvenido "+user
 	}
