@@ -8,9 +8,13 @@ var ejs = require('ejs');
 var fecha = require('./fecha.js');
 app.use(bodyParser());
 app.post('/', function (req, res) {
-	user = req.body.user;
-	password = req.body.password;
-	var ruta = "./database/" + user + "/personal.db"
+	user = localStorage.getItem('user');
+	password = localStorage.getItem('password');
+	var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		novalidado();
+	}
+	if (ruta!="./database/null/personal.db"){
 	var db = new sqlite3.Database(ruta);
 	db.serialize(function () {
 		db.run('create table if not exists personal ( _id INTEGER PRIMARY KEY AUTOINCREMENT, idusuario TEXT , nombre TEXT , apellido TEXT , cedula TEXT , fechanac TEXT , empresa TEXT , dpto TEXT , acceso TEXT , huella TEXT )');
@@ -22,7 +26,7 @@ app.post('/', function (req, res) {
 					console.log(row.nombre + " " + row.apellido);
 					var onoff = boleano2(row.acceso);
 					console.log(user);
-					res.render(__dirname + '/../views/users.jade', { "huella": row.huella, "ci": row.cedula, "acceso": onoff, "nac": row.fechanac, "dpto": row.dpto, "username": row.nombre, "apellido": row.apellido, "id": row._id, "empresa": row.empresa, user: user, password: password });
+					res.render(__dirname + '/../views/Editarempleado.jade', { "huella": row.huella, "ci": row.cedula, "acceso": onoff, "nac": row.fechanac, "dpto": row.dpto, "username": row.nombre, "apellido": row.apellido, "id": row._id, "empresa": row.empresa });
 				});
 		};
 		if (req.body.borrar >= 1) {
@@ -32,27 +36,34 @@ app.post('/', function (req, res) {
 				function (err, row) {
 					console.log(row.nombre + " " + row.apellido);
 					var onoff = boleano2(row.acceso);
-					res.render(__dirname + '/../views/borrar.jade', { "huella": row.huella, "ci": row.cedula, "acceso": onoff, "nac": row.fechanac, "dpto": row.dpto, "username": row.nombre, "apellido": row.apellido, "id": row._id, "empresa": row.empresa, user: user, password: password });
+					res.render(__dirname + '/../views/Borrarempleado.jade', { "huella": row.huella, "ci": row.cedula, "acceso": onoff, "nac": row.fechanac, "dpto": row.dpto, "username": row.nombre, "apellido": row.apellido, "id": row._id, "empresa": row.empresa });
 				});
 		};
 		if (req.body.Cerrar === "Cerrar Sesion") {
 			user = "";
+			localStorage.removeItem('user');
 			password = "";
+			localStorage.removeItem('password');
 			app.engine('html', ejs.__express);
-			res.render('index.html', { title: "Usuario o contraseña no valida, intente nuevamente", user: user, password: password });
+			res.render('../public/index.html');
 		};
 		if (req.body.buscar === 'Exportar por Fecha') {
-			res.render(__dirname + '/../views/export.jade', { user: user, password: password, fecha: fecha() });
+			res.render(__dirname + '/../views/Exportardatos.jade', { fecha: fecha() });
 		}
 		if (req.body.nuevo === 'Agregar Nuevo Empleado') {
-			res.render(__dirname + '/../views/nuevo.jade', { user: user, password: password });
+			res.render(__dirname + '/../views/Nuevoempleado.jade');
 		};
 	});
+	};
+	function novalidado(){
+app.engine('html', ejs.__express);
+res.render('index.html',{title:"Usuario o contraseña no valida, intente nuevamente"});
+};
 });
 function boleano(valor) {
 	if (valor === "on") {
 		return ("true");
-	}else {
+	} else {
 		return ("false");
 	};
 };

@@ -14,9 +14,17 @@ var x = 0;
 var hasta2="";
 var max = 0;
 router.post('/', function (req, res) {
-	var user=req.body.user;
-	var password=req.body.password;
-	console.log(user+password);
+if (req.body.iniciar === 'Iniciar') {
+	if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+};
+		localStorage.setItem('password',req.body.password);
+		localStorage.setItem('user',req.body.user);
+	}
+	var user=localStorage.getItem('user');
+	var password=localStorage.getItem('password');
+	nombre2="Bienvenido "+user;
 login.serialize(function () {
 	login.each("SELECT rowid AS rowid,* FROM users WHERE user = $useraux",
 	{ $useraux: user },
@@ -36,7 +44,10 @@ login.serialize(function () {
 });
 function validado(){
 	var ruta="./database/"+user+"/personal.db"
-	console.log(ruta);
+	if (ruta==="./database/null/personal.db"){
+		novalidado();
+	};
+    if (ruta!="./database/null/personal.db"){
 	var db = new sqlite3.Database(ruta);
 	function select(callback){
 	db.serialize(function () {
@@ -108,13 +119,10 @@ if (req.body.cancelar === 'Cancelar') {
 			 };
 		x = 0;
 		max = 0;
-	}
-	if (req.body.iniciar === 'Iniciar') {
-		nombre2="Bienvenido "+user;
-	}
-		if (req.body.grabar === 'Grabar') {
-			console.log('grabar');
-			db.each("SELECT _id AS _id,huella FROM personal WHERE _id = $useraux",
+	};	
+	if (req.body.grabar === 'Grabar') {
+		console.log('grabar');
+		db.each("SELECT _id AS _id,huella FROM personal WHERE _id = $useraux",
 	{ $useraux: id },
 		function (err, row) {
 			huella=row.huella;
@@ -144,9 +152,10 @@ if (req.body.cancelar === 'Cancelar') {
 			nombre2 = "Usuario" + " " + nombre + " " + apellido + " " + "Eliminado";
 		};
 	select(function(){		
-	res.render(__dirname + '/../views/lista', { vector: database, max: max, nombre2: nombre2, user: user,password:password,version:pjson.version,fecha:fecha()});
+	res.render(__dirname + '/../views/Listaempleados', { vector: database, max: max, nombre2: nombre2,version:pjson.version,fecha:fecha()});
 nombre2="";
 });
+};
 };
 function novalidado(){
 router.engine('html', ejs.__express);
@@ -159,8 +168,8 @@ res.render('index.html',{title:"Usuario o contraseña no valida, intente nuevame
         }
         else {
             return date;
-        }
-    }
+        };
+    };
 
 function boleano(valor) {
 	if (valor === "on") {
@@ -168,14 +177,14 @@ function boleano(valor) {
 	}
 	else {
 		return ("false");
-	}
-}
+	};
+};
 function boleano2(valor) {
 	if (valor === "true") {
 		return ('checked="on"');
 	} else {
 		return ("");
-	}
-}
+	};
+};
 module.exports = router;
 

@@ -4,6 +4,7 @@ head
  <link rel="stylesheet" href="css/layout.css">
  <form method="post" action="/users">
 <body class="cuerpo">
+- var user=localStorage.getItem('user')
 <div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<input type="submit" name="Cerrar" id="Cerrar" value="Cerrar Sesion" class="enlace2" /> </div>
 <div class="imag"><img class="logo" src="../images/logocrear2.png">
 <p class="info">
@@ -15,9 +16,6 @@ br
 br
 br
 <div class="informe2"> <p class="informetext">#{nombre2}</p></div>
-p  <input type="hidden" name="user" value=#{user}>
-p  <input type="hidden" name="password" value=#{password}>
-
 <table class="tabla" border="solid">
 tr
   <td class="id"> <h4> ID
@@ -31,7 +29,6 @@ tr
   <td class="id"> <h4>Acceso
   <td class="id"><h4>Huella
   <td class="opciones"><h4>Opciones
-
 tr
 - for (var x = 0; x < max; x++)
    <td class="id"> #{vector[x].id} 
