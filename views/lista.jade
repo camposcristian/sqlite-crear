@@ -13,6 +13,7 @@ br
 br
 br 
 br
+br
 <div class="informe2"> <p class="informetext">#{nombre2}</p></div>
 p  <input type="hidden" name="user" value=#{user}>
 p  <input type="hidden" name="password" value=#{password}>
@@ -49,11 +50,11 @@ tr
    if vector[x].huella===null||vector[x].huella==="Sin Enrolar"
         <td class="id"> 
    else
-        <td class="id"> <img src="huellacla.png" width="15" height="20" name="acceso"/>
+        <td class="id"> <img src="../images/huellacla.png" width="15" height="20" name="acceso"/>
         
-   <td class="id"> <input type=image src="editarcla.png" width="20" height="20" text="editar" name="editar" value=#{vector[x].id} />  &nbsp;
-   <input type=image src="borrarcla.png" width="20" height="20" text="borrar" name="borrar" value=#{vector[x].id} />&nbsp;
-   <a href="javascript:document.location.reload();"><img src="actualizarcla.png" width="20" height="20" text="actualizar" name="actualizar" />
+   <td class="id"> <input type=image src="../images/editarcla.png" width="20" height="20" text="editar" name="editar" value=#{vector[x].id} />  &nbsp;
+   <input type=image src="../images/borrarcla.png" width="20" height="20" text="borrar" name="borrar" value=#{vector[x].id} />&nbsp;
+   <a href="javascript:document.location.reload();"><img src="../images/actualizarcla.png" width="20" height="20" text="actualizar" name="actualizar" />
    <input type="hidden" name="id" value=#{vector[x].id} /> 
    <input type="hidden" name="username" value=#{vector[x].nombre} />
    <input type="hidden" name="apellido" value=#{vector[x].apellido} />

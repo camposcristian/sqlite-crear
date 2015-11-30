@@ -1,3 +1,35 @@
+
+.sprite {
+    background-image: url(/images/sprite.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+
+.sprite-20actualiza {
+    width: 20px;
+    height: 20px;
+    background-position: -5px -5px;
+}
+
+.sprite-20borrar {
+    width: 20px;
+    height: 20px;
+    background-position: -35px -5px;
+}
+
+.sprite-20editar {
+    width: 20px;
+    height: 20px;
+    background-position: -5px -35px;
+}
+
+.sprite-20huella {
+    width: 20px;
+    height: 20px;
+    background-position: -35px -35px;
+}
+
 .informe2{
 	width: 0px;
 	font-family:  Arial, Geneva, Helvetica, sans-serif;
@@ -20,6 +52,10 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 
+}
+.botonlogin{
+	margin-left:260px;
+	margin-top:-20px;
 }
 .margen{
 	margin-left:20%
@@ -284,24 +320,6 @@ font-size: 15px;
 		
 	}
 	
-	.notice p.warn {
-		text-align: center;
-		line-height: 45px;
-	}
-	
-	.notice a.close {
-		width: 9px;
-		height: 9px;
-		float: right;
-		background: url(../images/close.png) no-repeat top left;
-		text-indent: -9999px;
-		margin-right: 15px;
-		margin-top: 20px;
-	}
-	
-	.notice a.close:hover {
-		background: url(../images/close-hover.png) no-repeat top left;		
-	}
 	
 	.form-bg {
 		width: 370px;
@@ -364,7 +382,6 @@ width: 150px;
 	
 	
 	button {
-		background:url(../images/login.png) no-repeat;
 		width:82px;
 		height:32px;
 		border:0px;
@@ -373,7 +390,6 @@ width: 150px;
 	}
 
 	button:hover {
-		background:url(../images/login_hover.png) no-repeat;
 		width:82px;
 		height:32px;
 		border:0px;
@@ -382,7 +398,6 @@ width: 150px;
 	}
 	
 	button:active {
-		background:url(../images/login_active.png) no-repeat;
 		width:82px;
 		height:32px;
 		border:0px;
