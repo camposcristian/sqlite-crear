@@ -12,16 +12,16 @@
 br
 <div class="textoeditar">
 p Id:<input type="text" name="id" value=#{id} class="iddata" disabled/>
-p Nombre:<input type="text" name="username" value=#{username} maxlength="20"; class="nomdata"/>
-p Apellido:<input type="text" name="apellido" value=#{apellido} maxlength="20"; class="nomdata">
-p C.I:<input type="text" name="ci" value=#{ci} maxlength="16" class="cidata"/>
-p Fecha Nacimiento:<input type="date" name="nac" value=#{nac} class="cidata"/>
-p Empresa:<input type="text" name="empresa" value=#{empresa} maxlength="20" class="cidata"/>
-p Departamento:<input type="text" name="dpto" value=#{dpto} maxlength="20" class="cidata"/>
+p Nombre:<input type="text" name="username"  required maxlength="20" class="nomdata" value=#{username}>
+p Apellido:<input type="text" name="apellido"  required maxlength="20" class="nomdata" value=#{apellido}>
+p C.I:<input type="text" name="ci" maxlength="16"  required class="cidata" value=#{ci} >
+p Fecha Nacimiento:<input type="date" name="nac" class="cidata" value=#{nac} >
+p Empresa:<input type="text" name="empresa" maxlength="20"  required class="cidata" value=#{empresa} >
+p Departamento:<input type="text" name="dpto" maxlength="20"  required class="cidata" value=#{dpto} >
 p Acceso:<input type="checkbox" name="acceso" #{acceso}>
 <input type="hidden" name="id" value=#{id}>
 br
-p <input type="submit" id="grabar" name="grabar" value="Grabar" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" id="cancelar"name="cancelar" class="btn"/>
+p <input type="submit" id="grabar" name="grabar" value="Grabar" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" formnovalidate="formnovalidate" id="cancelar"name="cancelar" class="btn"/>
 </form>
 
 
