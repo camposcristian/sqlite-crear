@@ -3,7 +3,8 @@ var ejs=require('ejs');
 var router = express();
 var sqlite3 = require('sqlite3').verbose();
 var login = new sqlite3.Database('./database/Usuarios.sqlite');
-var fecha = require('./fecha.js');
+var fecha = require('./utiles/fecha.js');
+var boleano = require('./utiles/boleano.js');
 var fs = require('fs');
 var database = [];
 var nombre2 = "";
@@ -119,9 +120,11 @@ if (req.body.cancelar === 'Cancelar') {
 			 };
 		x = 0;
 		max = 0;
-	};	
-	if (req.body.grabar === 'Grabar') {
-		console.log('grabar');
+	};
+	if (req.body.grabar === 'Grabar'||req.body.grabar === 'Guardar' ) {
+		if (req.body.grabar === 'Guardar'){
+			insert();
+		}
 		db.each("SELECT _id AS _id,huella FROM personal WHERE _id = $useraux",
 	{ $useraux: id },
 		function (err, row) {
@@ -141,7 +144,10 @@ if (req.body.cancelar === 'Cancelar') {
 			var insertar = db.prepare("INSERT INTO personal VALUES (?,?,?,?,?,?,?,?,?,?)");
 			insertar.run(id, idusu, nombre, apellido, ci, fechanac, empresa, dpto, acceso, huella);
 			insertar.finalize();
-			nombre2 = "Usuario" + " " + nombre + " " + apellido + " " + "Actualizado"
+			if (req.body.grabar === 'Guardar'){
+			nombre2 = "Usuario" + " " + nombre + " " + apellido + " " + "Grabado"
+		}else{
+			nombre2 = "Usuario" + " " + nombre + " " + apellido + " " + "Actualizado"}
 			}
 		};
 		if (req.body.borrar === 'Eliminar') {
@@ -171,20 +177,5 @@ res.render('index.html',{title:"Usuario o contraseña no valida, intente nuevame
         };
     };
 
-function boleano(valor) {
-	if (valor === "on") {
-		return ("true");
-	}
-	else {
-		return ("false");
-	};
-};
-function boleano2(valor) {
-	if (valor === "true") {
-		return ('checked="on"');
-	} else {
-		return ("");
-	};
-};
 module.exports = router;
 
