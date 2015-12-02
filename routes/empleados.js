@@ -57,19 +57,23 @@ router.get('/confirmar/:id', function (req, res) {
 		});
 });
 
-
-router.get('/delete?', function (req, res) {
-	console.log('delete')
+router.get('/delete/:id', function (req, res) {
 	var id = req.params.id;
+	console.log(id)
 	var user = localStorage.getItem('user');
-	var ruta = "./database/" + user + "/personal.db";
+    var ruta = "./database/" + user + "/personal.db";
 	var db = new sqlite3.Database(ruta);
-	var borrar = db.prepare("DELETE FROM personal WHERE _id=(?)");
-	borrar.run(id);
-	borrar.finalize();
-	//nombre2 = "Usuario" + " " + nombre + " " + apellido + " " + "Eliminado";
-	res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version });
+	db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
+		{ $idaux: id },
+		function (err, row) {
+			console.log(row.nombre + " " + row.apellido);
+			var onoff = boleano2(row.acceso);
+			res.render(__dirname + '/../views/listaemp.jade', {'vector': row,'onoff':onoff});
+		});
 });
+
+
+
 
 
 router.get('/editar/:id', function (req, res) {
