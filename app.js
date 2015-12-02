@@ -8,10 +8,9 @@ var bodyParser = require('body-parser');
 console.log("Versión "+pjson.version);
 
 var users = require('./routes/users');
-var listar = require('./routes/listar');
-
-
-
+var empleados = require('./routes/empleados');
+var login = require('./routes/login');
+//var exportar  = require('./routes/exportar');
 
 var app = express();
 
@@ -29,7 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/users', users);
-app.use('/listar', listar);
+app.use('/empleados', empleados);
+app.use('/login', login);
+//app.use('/exportar', exportar);
+
 
 
 

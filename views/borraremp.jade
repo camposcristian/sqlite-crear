@@ -1,0 +1,29 @@
+<html> 
+<head> 
+<!-- Stylesheets -->
+<link rel="stylesheet" href="/../css/layout.css">
+</head>
+<body class="cuerpo">
+<div class="container">
+<div class="form-bg2">
+<form method="delete" action="../delete">
+<br>
+<p class="borrar"> ¿Estás seguro que deseas eliminar este usuario?</p>
+<div class="textoborrar">
+br
+br
+p Id:#{vector.id}
+p Nombre:#{vector.nombre}
+p Apellido:#{vector.apellido}
+p C.I:#{vector.cedula}
+p Fecha Nacimiento:#{vector.fechanac}
+p Empresa:#{vector.empresa}
+p Departamento:#{vector.dpto}
+p Acceso:<input type="checkbox" name="acceso" #{onoff} disabled /> 
+br
+br
+<input type="submit" class="btn"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" id="cancelar"name="cancelar" class="btn" />
+</div>
+</div>
+</form>
+
