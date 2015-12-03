@@ -6,7 +6,8 @@
 <body class="cuerpo">
 <div class="container">
 <div class="form-bg2">
-<form method="delete" action="/empleados/delete/#{vector.id}">
+<form method="DELETE" action="/empleados/delete">
+<input type="hidden" name="id" value=#{vector.id}>
 <br>
 <p class="borrar"> ¿Estás seguro que deseas eliminar este usuario?</p>
 <div class="textoborrar">
