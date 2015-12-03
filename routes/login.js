@@ -35,6 +35,8 @@ router.post('/', function (req, res) {
 		router.engine('html', ejs.__express);
 		res.render('index.html', { title: "Usuario o contraseña no valida, intente nuevamente" });
 	};
-	
+	function validado() {
+		res.redirect('/empleados');
+	};
 });
 module.exports = router;

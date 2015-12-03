@@ -57,7 +57,7 @@ router.get('/confirmar/:id', function (req, res) {
 		});
 });
 
-router.delete('/delete/:id', function (req, res) {
+router.delete('/delete/:id?', function (req, res) {
 	var id = req.params.id;
 	console.log(id)
 	var user = localStorage.getItem('user');
