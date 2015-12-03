@@ -6,8 +6,8 @@
 <body class="cuerpo">
 <div class="container">
 <div class="form-bg2">
-<form method="delete" action="/empleados/delete/#{vector.id}">
-<input type="hidden" name="id" value=#{vector.id}> 
+<form method="POST" action="/empleados/#{vector.id}" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="_method" value="delete">
 <br>
 <p class="borrar"> ¿Estás seguro que deseas eliminar este usuario?</p>
 <div class="textoborrar">
@@ -23,7 +23,7 @@ p Departamento:#{vector.dpto}
 p Acceso:<input type="checkbox" name="acceso" #{onoff} disabled /> 
 br
 br
-<input type="submit" class="btn"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" id="cancelar"name="cancelar" class="btn" />
+<input type="submit" class="btn"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" id="cancelar" name="cancelar" class="btn" />
 </div>
 </div>
 </form>

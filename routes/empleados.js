@@ -11,7 +11,8 @@ var huella="";
 var sqlite3 = require('sqlite3').verbose();
 var fecha = require('./utiles/fecha.js');
 var boleano = require('./utiles/boleano.js');
-router.use(bodyParser());
+var LocalStorage = require('node-localstorage').LocalStorage;
+
 
 
 router.get('/', function (req, res) {
@@ -57,7 +58,7 @@ router.get('/confirmar/:id', function (req, res) {
 		});
 });
 
-router.delete('/delete/:id', function (req, res) {
+router.delete('/:id', function (req, res) {
 	var id = req.params.id;
 	console.log(id)
 	var user = localStorage.getItem('user');
