@@ -6,7 +6,8 @@
 <body class="cuerpo">
 <div class="container">
 <div class="form-bg2">
-<form method="post" action="/empleados/grabar" name="form" >
+<form method="POST" action="/empleados/#{vector.id}" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="_method" value="put">
 <br>
 <p class="borrar"> Editar datos de Empleado</p>
 br
@@ -19,9 +20,8 @@ p Fecha Nacimiento:<input type="date" name="nac" class="cidata" value=#{vector.f
 p Empresa:<input type="text" name="empresa" maxlength="20"  required class="cidata" value=#{vector.empresa} >
 p Departamento:<input type="text" name="dpto" maxlength="20"  required class="cidata" value=#{vector.dpto} >
 p Acceso:<input type="checkbox" name="acceso" #{onoff}>
-<input type="hidden" name="id" value=#{id}>
 br
-p <input type="submit" id="grabar" name="grabar" value="Grabar" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" formnovalidate="formnovalidate" id="cancelar"name="cancelar" class="btn"/>
+p <input type="submit" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Cancelar" formnovalidate="formnovalidate" id="cancelar"name="cancelar" class="btn"/>
 </form>
 
 

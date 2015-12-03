@@ -35,7 +35,7 @@ $(document).ready(function() {
 	$('.imag').mouseenter(function(){			 		
  		$('.imag').height('99%');		
  		$('.imag').width('250px');
-	    $('<br><br><br><br><br><ul><li><input type="submit" name="buscar" id="buscar" value="Exportar por Fecha" class="enlace" /><br><br><br><li><input type="submit" name="nuevo" id="nuevo" value="Agregar Nuevo Empleado" class="enlace" /></ul>').appendTo('.info');
+	    $('<br><br><br><br><br><ul><li><a href=/exportar class="enlace">Exportar por Fecha</a><br><br><br><li><a href=empleados/nuevo class="enlace">Nuevo Empleado</a></ul>').appendTo('.info');
 		 
 	});
 	$('.imag').mouseleave(function(){	 

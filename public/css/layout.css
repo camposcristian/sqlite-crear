@@ -90,15 +90,27 @@
 		left:10%;
 }
 
-.enlace2{
 
+.enlace2{
+text-align:center;	
+left:89%;
+top:8px;
+position: fixed;
 border:4px solid;
-height: 30px;
+height: 22px;
 width: 120px;
 border-color:#149c82;
 border-radius:15px;
 background-color:#E0E0E0;
-cursor:pointer;}
+cursor:pointer;
+ }
+.enlace2 a{
+	text-decoration:none;
+	color:black;
+	font-size:13px;
+	font-family: Arial;
+	
+}
 
 .textoborrar{
 	margin-top:0px;
@@ -231,7 +243,7 @@ font-size: 14px;
 
 .bienvenido{
 	text-align:right;
-	margin-right:50px;
+	margin-right:160px;
 	color:white;
 	font-family:Arial, Geneva, Helvetica, sans-serif;
     font-size: 14px;
@@ -239,7 +251,16 @@ font-size: 14px;
 	
 	
 }
-
+.version{
+	text-align:right;
+	margin-right:100px;
+	color:white;
+	font-family:Arial, Geneva, Helvetica, sans-serif;
+    font-size: 14px;
+	
+	
+	
+}
 
 .opciones{
 	width:85px;
@@ -424,7 +445,6 @@ width: 150px;
 		color: #fff;
 		font-size: 12px;
 		font-weight: bold;
-		text-shadow: 0 1px 0 rgba(0,0,0,0.3);
 	}
 	
 	p.forgot a {

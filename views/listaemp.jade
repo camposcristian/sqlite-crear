@@ -4,7 +4,7 @@ head
  <link rel="stylesheet" href="css/layout.css">
 <body class="cuerpo">
 - var user=localStorage.getItem('user')
-<div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<input type="submit" name="Cerrar" id="Cerrar" value="Cerrar Sesion" class="enlace2" /> </div>
+<div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<div class="enlace2"><a href=cierresesion>Cerrar Sesion</a></div></div>
 <div class="imag"><img class="logo" src="../images/logocrear2.png">
 <p class="info">
 br
@@ -56,7 +56,7 @@ tr
    else 
     tr
 </table>
-<p class="bienvenido"> Version: #{version}
+<p class="version"> Version: #{version}
 
 <!-- JS  -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
