@@ -19,12 +19,14 @@ router.post('/', function (req, res) {
 		if (desde>hasta){
 			nombre2="Fecha inicial no puede ser mayor que fecha final";
 		};	
+		select(function(database){	
 		function suma1(){
 			var dates=new Date(hasta);
 			return dates.getFullYear() + "-" + cero((dates.getMonth() + 1)) + "-" + cero((dates.getDate() +1));		
 		};
 		if (hasta>=desde && req.body.formato==="txt"){
 			 hasta2=suma1(hasta);
+			 console.log(hasta2)
 			c=0;
 			var user=localStorage.getItem('user');
 			var ruta2="./database/"+user+"/database.txt";
@@ -40,7 +42,6 @@ router.post('/', function (req, res) {
 		 nombre2=c+" Dato(s) exportados en .Txt";
 		 };
 			 if(hasta>=desde && req.body.formato==="Db"){ 
-				 hasta2=suma1(hasta);
 			  c=0;
 			  var ruta3="./database/"+user+"/exportados.db";
 			  var exporta = new sqlite3.Database(ruta3);
@@ -58,8 +59,7 @@ router.post('/', function (req, res) {
 			    });
 			 };
 		x = 0;
-		max = 0;
-		select(function(database){		
+		max = 0;	
 			max=(database.length);
 	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2});
 nombre2="";
@@ -73,5 +73,6 @@ nombre2="";
         else {
             return date;
         };
-    };
+    }; 
+	
 module.exports = router;
