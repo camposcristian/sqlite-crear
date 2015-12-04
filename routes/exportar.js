@@ -6,6 +6,7 @@ var fs = require('fs');
 var database;
 var nombre2 = "";
 var c=0;
+var pjson = require('../package.json');
 var sqlite3 = require('sqlite3').verbose();
 var max = 0;
 var fecha = require('./utiles/fecha.js');
@@ -14,12 +15,13 @@ router.get('/', function (req, res) {
 res.render(__dirname + '/../views/exportaremp',{fecha:fecha()});
 });
 router.post('/', function (req, res) {
+	select(function(database){
+		max=(database.length);	
 		var desde = req.body.desde;
 		var hasta = req.body.hasta;
 		if (desde>hasta){
 			nombre2="Fecha inicial no puede ser mayor que fecha final";
 		};	
-		select(function(database){	
 		function suma1(){
 			var dates=new Date(hasta);
 			return dates.getFullYear() + "-" + cero((dates.getMonth() + 1)) + "-" + cero((dates.getDate() +1));		
@@ -58,10 +60,8 @@ router.post('/', function (req, res) {
 			    nombre2=c+" Dato(s) exportados en .Db"; 			   
 			    });
 			 };
-		x = 0;
-		max = 0;	
-			max=(database.length);
-	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2});
+		x = 0;	
+	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version});
 nombre2="";
 });
 });
