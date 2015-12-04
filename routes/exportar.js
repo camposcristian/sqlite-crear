@@ -14,8 +14,6 @@ router.get('/', function (req, res) {
 res.render(__dirname + '/../views/exportaremp',{fecha:fecha()});
 });
 router.post('/', function (req, res) {
-	    database=select()
-	    console.log(database)
 		var desde = req.body.desde;
 		var hasta = req.body.hasta;
 		if (desde>hasta){
@@ -61,6 +59,11 @@ router.post('/', function (req, res) {
 			 };
 		x = 0;
 		max = 0;
+		select(function(database){		
+			max=(database.length);
+	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2});
+nombre2="";
+});
 });
 
  function cero(date) {

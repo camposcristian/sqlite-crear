@@ -10,6 +10,7 @@ var nombre2 = "";
 var huella="";
 var sqlite3 = require('sqlite3').verbose();
 var fecha = require('./utiles/fecha.js');
+var select = require('./utiles/consultas.js');
 var boleano = require('./utiles/boleano.js');
 
 //post empleados/id
@@ -52,21 +53,8 @@ router.get('/', function (req, res) {
 	if (nombre2===""){
 	nombre2 = "Bienvenido " + user;
 	}
-	var ruta = "./database/" + user + "/personal.db";
-	var db = new sqlite3.Database(ruta);
-	function select(callback) {
-		db.serialize(function () {
-			db.run('create table if not exists personal (_id INTEGER PRIMARY KEY AUTOINCREMENT, idusuario TEXT , nombre TEXT , apellido TEXT , cedula TEXT , fechanac TEXT , empresa TEXT , dpto TEXT , acceso TEXT , huella TEXT )');
-			db.all("SELECT _id AS id,* FROM personal",
-				function (err, rows) {
-					database = rows;
-					max = (database.length);
-					callback();
-				});
-			x = 0;
-		});
-	};
-	select(function () {
+	select(function (database) {
+		max=(database.length);
 		res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version });
 		nombre2 = "";
 	});
