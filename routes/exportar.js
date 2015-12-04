@@ -2,16 +2,20 @@ var express = require('express');
 var router = express();
 var i = 0;
 var hasta2="";
-var database = [];
+var fs = require('fs');
+var database;
 var nombre2 = "";
 var c=0;
 var sqlite3 = require('sqlite3').verbose();
 var max = 0;
 var fecha = require('./utiles/fecha.js');
+var select = require('./utiles/consultas.js');
 router.get('/', function (req, res) {
-	res.render(__dirname + '/../views/exportaremp',{fecha:fecha()});
+res.render(__dirname + '/../views/exportaremp',{fecha:fecha()});
 });
 router.post('/', function (req, res) {
+	    database=select()
+	    console.log(database)
 		var desde = req.body.desde;
 		var hasta = req.body.hasta;
 		if (desde>hasta){
@@ -28,7 +32,7 @@ router.post('/', function (req, res) {
 			var ruta2="./database/"+user+"/database.txt";
 	 for (var x = 0; x < max; x++){
 		 if(database[x].idusuario>=desde && hasta2>=database[x].idusuario){
-			 c=c+1;	 
+		 c=c+1;	 
 	fs.appendFile(ruta2,database[x]._id+","+database[x].idusuario+","+database[x].nombre+","+database[x].apellido+","+database[x].cedula+","+database[x].fechanac+","+database[x].empresa+","+database[x].dpto+","+database[x].acceso+","+database[x].huella+'\r\n', function (err) {
     if (err) {
     c=0;
@@ -58,6 +62,7 @@ router.post('/', function (req, res) {
 		x = 0;
 		max = 0;
 });
+
  function cero(date) {
         if (date < 10) {
             return ("0" + date);
