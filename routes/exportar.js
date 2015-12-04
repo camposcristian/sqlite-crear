@@ -28,7 +28,6 @@ router.post('/', function (req, res) {
 		};
 		if (hasta>=desde && req.body.formato==="txt"){
 			 hasta2=suma1(hasta);
-			 console.log(hasta2)
 			c=0;
 			var user=localStorage.getItem('user');
 			var ruta2="./database/"+user+"/database.txt";
@@ -42,9 +41,12 @@ router.post('/', function (req, res) {
         }});	 
 		 }};  
 		 nombre2=c+" Dato(s) exportados en .Txt";
+		 x = 0;
 		 };
 			 if(hasta>=desde && req.body.formato==="Db"){ 
 			  c=0;
+			  hasta2=suma1(hasta);
+			  var user=localStorage.getItem('user');
 			  var ruta3="./database/"+user+"/exportados.db";
 			  var exporta = new sqlite3.Database(ruta3);
 			   exporta.serialize(function () {
@@ -60,7 +62,7 @@ router.post('/', function (req, res) {
 			    nombre2=c+" Dato(s) exportados en .Db"; 			   
 			    });
 			 };
-		x = 0;	
+			
 	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version});
 nombre2="";
 });
