@@ -49,14 +49,19 @@ router.get('/', function (req, res) {
 		var LocalStorage = require('node-localstorage').LocalStorage;
 		localStorage = new LocalStorage('./scratch');
 	};
-	var user = localStorage.getItem('user');
-	if (nombre2===""){
+	var user = localStorage.getItem('user')
+
+	select(function (database) {
+		if (database==='error'){
+		 res.redirect('/');
+	}else{
+		max=(database.length);
+		if (nombre2===""){
 	nombre2 = "Bienvenido " + user;
 	}
-	select(function (database) {
-		max=(database.length);
 		res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version });
 		nombre2 = "";
+	}
 	});
 });
 //delete empleados/id

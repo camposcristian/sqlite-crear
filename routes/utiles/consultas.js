@@ -1,4 +1,3 @@
-
 module.exports = function select(callback) {
 	var sqlite3 = require('sqlite3').verbose();
 	if (typeof localStorage === "undefined" || localStorage === null) {
@@ -6,6 +5,9 @@ module.exports = function select(callback) {
 		localStorage = new LocalStorage('./scratch');
 	};
 var user=localStorage.getItem('user');
+if (user===null){
+   callback('error')
+}else{
 var ruta = "./database/" + user + "/personal.db";
 var db = new sqlite3.Database(ruta);
 	       db.serialize(function () {
@@ -14,7 +16,8 @@ var db = new sqlite3.Database(ruta);
 				function (err, rows) {
 				callback(rows);		
 })
-		  })}
+		  }
+)}}
 
    
  
