@@ -13,7 +13,7 @@ var fecha = require('./utiles/fecha.js');
 var boleano = require('./utiles/boleano.js');
 
 //post empleados/id
-router.post('/', function (req, res) {
+router.post('/:id', function (req, res) {
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
 	var id = req.params.id;
