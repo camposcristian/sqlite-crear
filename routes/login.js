@@ -20,7 +20,11 @@ router.post('/', function (req, res) {
 			function (err, row) {
 				if (row.user === user) {
 					if (row.password === password) {
+						if (row.Admin==='admin'){
+							nuevousu()
+						}else{
 						validado();
+						}
 					} else {
 						novalidado();
 					};
@@ -38,5 +42,8 @@ router.post('/', function (req, res) {
 	function validado() {
 		res.redirect('/empleados');
 	};
+	function nuevousu(){
+		res.redirect('/users');
+	}
 });
 module.exports = router;
