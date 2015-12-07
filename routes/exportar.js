@@ -71,8 +71,7 @@ nombre2="";
  function cero(date) {
         if (date < 10) {
             return ("0" + date);
-        }
-        else {
+        } else {
             return date;
         };
     }; 

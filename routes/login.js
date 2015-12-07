@@ -9,6 +9,7 @@ router.post('/', function (req, res) {
 		var LocalStorage = require('node-localstorage').LocalStorage;
 		localStorage = new LocalStorage('./scratch');
 	};
+	localStorage.setItem('admin', 'normal');
 	localStorage.setItem('password', req.body.password);
 	localStorage.setItem('user', req.body.user);
 	var user = localStorage.getItem('user');
@@ -43,6 +44,7 @@ router.post('/', function (req, res) {
 		res.redirect('/empleados');
 	};
 	function nuevousu(){
+		localStorage.setItem('admin', 'admin');
 		res.redirect('/users');
 	}
 });

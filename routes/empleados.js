@@ -28,7 +28,7 @@ router.post('/:id', function (req, res) {
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
 	var db = new sqlite3.Database(ruta);
-	insert()
+	insert();
 			function insert(){
 			var borrar = db.prepare("DELETE FROM personal WHERE _id=(?)");
 			borrar.run(id);
@@ -49,7 +49,7 @@ router.get('/', function (req, res) {
 		var LocalStorage = require('node-localstorage').LocalStorage;
 		localStorage = new LocalStorage('./scratch');
 	};
-	var user = localStorage.getItem('user')
+	var user = localStorage.getItem('user');
 
 	select(function (database) {
 		if (database==='error'){
