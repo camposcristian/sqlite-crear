@@ -15,12 +15,17 @@ res.render(__dirname + '/../views/registrausu.jade');
 router.post('/', function (req, res) {
 			var usuario=req.body.username;
 			var password=req.body.password;
+			var password2=req.body.password2;
 			var tipo="";
+			if (password2===password){
 			login.serialize(function () {
 			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?)");
 			insertar.run(usuario, password, tipo);
 			insertar.finalize();
 			});
+			}else{
+			res.render(__dirname + '/../views/registrausu.jade',{info:'Contraseñas no coinciden'});
+			}
 });
 
 module.exports = router;
