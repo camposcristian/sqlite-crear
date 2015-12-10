@@ -16,7 +16,11 @@ router.post('/', function (req, res) {
 			var usuario=req.body.username;
 			var password=req.body.password;
 			var password2=req.body.password2;
-			var tipo="";
+			if (req.body.type==='on'){
+			var tipo="admin";
+			}else{
+			tipo="";
+			};
 			if (password2===password){
 			login.serialize(function () {
 			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?)");
@@ -25,7 +29,7 @@ router.post('/', function (req, res) {
 			});
 			}else{
 			res.render(__dirname + '/../views/registrausu.jade',{info:'Contraseñas no coinciden'});
-			}
+			};
 });
 
 module.exports = router;
