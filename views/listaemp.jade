@@ -1,4 +1,3 @@
-
 head 
  <!-- Stylesheets -->
  <link rel="stylesheet" href="css/layout.css">
@@ -37,8 +36,7 @@ tr
    <td class="fecha">  #{vector[x].fechanac}
    <td class="opciones"> #{vector[x].empresa}
    <td> #{vector[x].dpto}   
-   <td class="fecha">  #{vector[x].idusuario}
-   
+   <td class="fecha">  #{vector[x].idusuario}  
    if vector[x].acceso == "true"
         <td class="id"> <input type="checkbox" name="acceso" checked="true" disabled /> 
    else
@@ -50,14 +48,13 @@ tr
    <td class="id">
    <a href=empleados/editar/#{vector[x].id}><input type=image src="../images/editarcla.png" width="20" height="20" name="editar"></a>&nbsp;
    <a href=empleados/confirmar/#{vector[x].id}><input type=image src="../images/borrarcla.png" width="20" height="20" name="borrar"></a>&nbsp;
-   <a href="javascript:document.location.reload();"><img src="../images/actualizarcla.png" width="20" height="20" text="actualizar" name="actualizar" />
+   <a href="javascript:document.location.reload();"><img src="../images/actualizarcla.png" width="20" height="20" text="actualizar" name="actualizar" />  
    if (x%2)==0
     <tr class="par">   
    else 
     tr
 </table>
 <p class="version"> Version: #{version}
-
 <!-- JS  -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
 <script>window.jQuery || document.write("<script src='js/jquery-1.5.1.min.js'>\x3C/script>")</script>
