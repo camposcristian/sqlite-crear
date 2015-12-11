@@ -170,6 +170,12 @@ router.get('/editar/:id', function (req, res) {
 });
 // get menu nuevo 
 router.get('/nuevo', function (req, res) {
+	var user = localStorage.getItem('user');
+	 var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+	res.redirect('/');
+	}else{
 	res.render(__dirname + '/../views/nuevoemp.jade', { 'fecha': fecha() });
+	};
 });
 module.exports = router;

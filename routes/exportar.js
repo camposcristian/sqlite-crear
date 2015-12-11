@@ -12,7 +12,13 @@ var max = 0;
 var fecha = require('./utiles/fecha.js');
 var select = require('./utiles/consultas.js');
 router.get('/', function (req, res) {
+	var user = localStorage.getItem('user');
+	var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		res.redirect('/');
+	}else{
 res.render(__dirname + '/../views/exportaremp',{fecha:fecha()});
+	}
 });
 router.post('/', function (req, res) {
 	select(function(database){
