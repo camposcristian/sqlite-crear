@@ -58,13 +58,15 @@ router.post('/', function (req, res) {
 		     c=c+1;
 			insertar.run(database[x]._id,database[x].idusuario,database[x].nombre, database[x].apellido, database[x].cedula, database[x].fechanac, database[x].empresa, database[x].dpto,database[x].acceso,database[x].huella);
 		 };    
-			   } insertar.finalize();
+			   };
+			   insertar.finalize();
 			    nombre2=c+" Dato(s) exportados en .Db"; 			   
 			    });
 			 };
 			
 	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version});
 nombre2="";
+		
 });
 });
 

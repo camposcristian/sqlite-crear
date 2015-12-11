@@ -40,9 +40,7 @@ router.post('/', function (req, res) {
 		var borrar = db.prepare("DELETE FROM personal WHERE _id=(?)");
 		borrar.run(id);
 		borrar.finalize();
-		if (huella === "Sin Enrolar" || huella === null) {
-			huella = "Sin Enrolar";
-		}
+		huella = "Sin Enrolar";
 		var insertar = db.prepare("INSERT INTO personal VALUES (?,?,?,?,?,?,?,?,?,?)");
 		insertar.run(id, idusu, nombre, apellido, ci, fechanac, empresa, dpto, acceso, huella);
 		insertar.finalize();
