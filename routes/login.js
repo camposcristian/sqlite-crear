@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express();
 var ejs = require('ejs');
+var fs = require('fs');
 var sqlite3 = require('sqlite3').verbose();
 var login = new sqlite3.Database('./database/Usuarios.sqlite');
 var nombre2 = "";
@@ -21,10 +22,10 @@ router.post('/', function (req, res) {
 			function (err, row) {
 				if (row.user === user) {
 					if (row.password === password) {
-						if (row.Admin==='admin'){
+						if (row.Admin === 'admin') {
 							nuevousu()
-						}else{
-						validado();
+						} else {
+							validado();
 						}
 					} else {
 						novalidado();
@@ -41,9 +42,16 @@ router.post('/', function (req, res) {
 		res.render('index.html', { title: "Usuario o contraseña no valida, intente nuevamente" });
 	};
 	function validado() {
+		if (!fs.existsSync('./database/'+user)) {
+			fs.mkdirSync('./database/'+user, 0766, function (err) {
+				if (err) {
+					console.log(err);
+				}
+			});
+		}
 		res.redirect('/empleados');
 	};
-	function nuevousu(){
+	function nuevousu() {
 		localStorage.setItem('admin', 'admin');
 		res.redirect('/users');
 	}

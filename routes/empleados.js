@@ -17,12 +17,12 @@ var boleano = require('./utiles/boleano.js');
 router.post('/', function (req, res) {
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
-	if (req.body.id!=0){
+	if (req.body.id != 0) {
 		var id = req.body.id;
-	}else{
+	} else {
 		id;
 	}
-	
+
 	var idusu = fecha().toString();
 	var ci = req.body.ci;
 	var fechanac = req.body.nac;
@@ -154,6 +154,4 @@ router.get('/editar/:id', function (req, res) {
 router.get('/nuevo', function (req, res) {
 	res.render(__dirname + '/../views/nuevoemp.jade', { 'fecha': fecha() });
 });
-
-
 module.exports = router;
