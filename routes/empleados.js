@@ -22,7 +22,6 @@ router.post('/', function (req, res) {
 	} else {
 		id;
 	}
-
 	var idusu = fecha().toString();
 	var ci = req.body.ci;
 	var fechanac = req.body.nac;
@@ -32,6 +31,9 @@ router.post('/', function (req, res) {
 	var huella;
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		res.redirect('/');
+	}else{
 	var db = new sqlite3.Database(ruta);
 	insert();
 	function insert() {
@@ -47,6 +49,7 @@ router.post('/', function (req, res) {
 	}
 	nombre2 = "Empleado" + " " + nombre + " " + apellido + " " + "Añadido";
 	res.redirect('/empleados');
+	};
 });
 //get /empleados
 router.get('/', function (req, res) {
@@ -55,24 +58,28 @@ router.get('/', function (req, res) {
 		localStorage = new LocalStorage('./scratch');
 	};
 	var user = localStorage.getItem('user');
+	var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		res.redirect('/');
+	}else{
 	select(function (database) {
-		if (database === 'error') {
-			res.redirect('/');
-		} else {
 			max = (database.length);
 			if (nombre2 === "") {
 				nombre2 = "Bienvenido " + user;
 			}
 			res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version });
-			nombre2 = "";
-		}
+			nombre2 = "";	
 	});
+	};
 });
 //delete empleados/id
 router.delete('/:id', function (req, res) {
 	var id = req.params.id;
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		res.redirect('/');
+	}else{
 	var db = new sqlite3.Database(ruta);
 	db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
 		{ $idaux: id },
@@ -83,6 +90,7 @@ router.delete('/:id', function (req, res) {
 			nombre2 = "Empleado" + " " + row.nombre + " " + row.apellido + " " + "Eliminado";
 			res.redirect('/empleados');
 		});
+	};
 });
 //put empleados/id
 router.put('/:id', function (req, res) {
@@ -98,6 +106,9 @@ router.put('/:id', function (req, res) {
 	var huella;
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		res.redirect('/');
+	}else{
 	var db = new sqlite3.Database(ruta);
 	db.each("SELECT _id AS _id,huella FROM personal WHERE _id = $useraux",
 		{ $useraux: id },
@@ -121,12 +132,16 @@ router.put('/:id', function (req, res) {
 	}
 	nombre2 = "Empleado" + " " + nombre + " " + apellido + " " + "Actualizado";
 	res.redirect('/empleados');
+	};
 });
 // get confirmar eliminacion
 router.get('/confirmar/:id', function (req, res) {
 	var id = req.params.id;
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		res.redirect('/');
+	}else{
 	var db = new sqlite3.Database(ruta);
 	db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
 		{ $idaux: id },
@@ -135,12 +150,16 @@ router.get('/confirmar/:id', function (req, res) {
 			var onoff = boleano2(row.acceso);
 			res.render(__dirname + '/../views/borraremp.jade', { 'vector': row, 'onoff': onoff });
 		});
+	};
 });
 // get menu edicion
 router.get('/editar/:id', function (req, res) {
 	var id = req.params.id;
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
+	if (ruta==="./database/null/personal.db"){
+		res.redirect('/');
+	}else{
 	var db = new sqlite3.Database(ruta);
 	db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
 		{ $idaux: id },
@@ -149,6 +168,7 @@ router.get('/editar/:id', function (req, res) {
 			var onoff = boleano2(row.acceso);
 			res.render(__dirname + '/../views/editaremp.jade', { 'vector': row, 'onoff': onoff });
 		});
+	};
 });
 // get menu nuevo 
 router.get('/nuevo', function (req, res) {
