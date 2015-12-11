@@ -26,6 +26,7 @@ router.post('/', function (req, res) {
 			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?)");
 			insertar.run(usuario, password, tipo);
 			insertar.finalize();
+			res.render(__dirname + '/../views/registrausu.jade',{info:'Usuario '+usuario+' registrado'});
 			});
 			}else{
 			res.render(__dirname + '/../views/registrausu.jade',{info:'Contraseñas no coinciden'});
