@@ -12,11 +12,11 @@
 		left:35%
 }
 .actualiza{
-position: fixed;
 top:10px;
 width:25px;
 height:25px;
-left:140px;
+right:160px;
+position: fixed;
 }
 .btn {
   background: #3498db;
@@ -171,8 +171,7 @@ font-size: 14px;
 		height: 25px;
 		left:10px;
 }
-.barra{
-	
+.barra{	
 		width: 100%;
 		background:#149c82;
 		text-align: right;
@@ -186,7 +185,7 @@ font-size: 14px;
 	}
 .bienvenido{
 	text-align:right;
-	margin-right:180px;
+	margin-right:200px;
 	color:white;
 	font-family:Arial, Geneva, Helvetica, sans-serif;
     font-size: 14px;
@@ -367,6 +366,7 @@ width: 150px;
 		margin-left:415px;
 		padding: 0; 	
 }
+
 	
 
 /* #Media Queries
