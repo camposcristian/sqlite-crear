@@ -1,6 +1,3 @@
-	
-	
-
 $(document).ready(function() {
 
 	/* Tabs Activiation
@@ -28,41 +25,40 @@ $(document).ready(function() {
 				//Show Tab Content
 				$(contentLocation).show().siblings().hide();
 				
-			} 
+			};
 		});
 	}); 
 	
 	$('.imag').mouseenter(function(){			 		
  		$('.imag').height('99%');		
  		$('.imag').width('250px');
-	    $('<br><br><br><br><br><ul><li><a href=/exportar class="enlace">Exportar por Fecha</a><br><br><br><li><a href=empleados/nuevo class="enlace">Nuevo Empleado</a></ul>').appendTo('.info');
-		 
+		$('.info').show();
 	});
 	$('.imag').mouseleave(function(){	 
  		$('.imag').height('45px');		
  		$('.imag').width('140px')	
-		$('.info').empty()
+		$('.info').hide();
 	});
 	$(".informe2").animate({
    'width':'300pt'
-	})
+	});
 	 $(".informe2").animate({
    'height':'40pt'
-},1000)
+},1000);
  
  setTimeout(function() {
   $(".informetext").animate({
    'font-size': '12pt'
-})},1000)
+})},1000);
  
  setTimeout(function() {
 	 $(".informetext").animate({
 	 'font-size': '0pt'
- },3000)},6000)
+ },3000)},6000);
  
 setTimeout(function() {
 	 $(".informetext").hide()
-},7000)
+},7000);
 
 setTimeout(function() {
 	 $(".informe2").animate({
@@ -72,7 +68,5 @@ setTimeout(function() {
  setTimeout(function() {
 $(".informe2").animate({
    'width':'0pt'
-	})
- },6000)
-	
+	})},6000);
 });

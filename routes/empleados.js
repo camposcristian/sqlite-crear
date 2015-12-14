@@ -56,6 +56,7 @@ router.get('/', function (req, res) {
 		localStorage = new LocalStorage('./scratch');
 	};
 	var user = localStorage.getItem('user');
+	var admin = localStorage.getItem('admin');
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 		res.redirect('/');
@@ -65,7 +66,7 @@ router.get('/', function (req, res) {
 			if (nombre2 === "") {
 				nombre2 = "Bienvenido " + user;
 			}
-			res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version });
+			res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version, admin:admin });
 			nombre2 = "";	
 	});
 	};

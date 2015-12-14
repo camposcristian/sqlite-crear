@@ -5,6 +5,7 @@ var fs = require('fs');
 var sqlite3 = require('sqlite3').verbose();
 var login = new sqlite3.Database('./database/Usuarios.sqlite');
 var nombre2 = "";
+var menu="";
 router.post('/', function (req, res) {
 	if (typeof localStorage === "undefined" || localStorage === null) {
 		var LocalStorage = require('node-localstorage').LocalStorage;
@@ -22,11 +23,9 @@ router.post('/', function (req, res) {
 			function (err, row) {
 				if (row.user === user) {
 					if (row.password === password) {
-						if (row.Admin === 'admin') {
-							nuevousu()
-						} else {
-							validado();
-						}
+					 localStorage.setItem('admin', row.Admin);
+					 console.log(row.Admin)
+							validado();	
 					} else {
 						novalidado();
 					};
@@ -49,11 +48,8 @@ router.post('/', function (req, res) {
 				};
 			});
 		};
+		console.log(menu)
 		res.redirect('/empleados');
-	};
-	function nuevousu() {
-		localStorage.setItem('admin', 'admin');
-		res.redirect('/users');
 	};
 });
 module.exports = router;

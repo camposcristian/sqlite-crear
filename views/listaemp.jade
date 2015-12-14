@@ -1,13 +1,24 @@
 head 
  <!-- Stylesheets -->
- <link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/layout.css">
 <body class="cuerpo">
 - var user=localStorage.getItem('user')
 <div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<div class="enlace2"><a href=cierresesion>Cerrar Sesion</a></div></div>
 <a href="javascript:document.location.reload();"><img src="../images/actualizarcla.png" width="20" height="20" text="actualizar" name="actualizar" class="actualiza"/></a>
 <div class="imag"><img class="logo" src="../images/logocrear2.png">
-<p class="info">
+<div class="info">
+ul
+ li <a href=/exportar class="enlace">Exportar por Fecha</a>
+ br
+ br
+ li <a href=empleados/nuevo class="enlace">Nuevo Empleado</a>
+ br
+ br
+ if admin==='admin'
+  li <a href=/users class="enlace">Nuevo Usuario</a>
+</ul>
 br
+</div>
 </div>
 br
 br
@@ -48,9 +59,7 @@ tr
    else
         <td class="id"> <img src="../images/huellacla.png" width="15" height="20" name="acceso"/>   
    <td class="opciones">
-   &nbsp;
-   <a href=empleados/editar/#{vector[x].id}><input type=image src="../images/editarcla.png" width="20" height="20" name="editar"></a>&nbsp;
-   &nbsp;
+   <a href=empleados/editar/#{vector[x].id}><input type=image src="../images/editarcla.png" width="20" height="20" name="editar"></a>&nbsp; &nbsp;
    <a href=empleados/confirmar/#{vector[x].id}><input type=image src="../images/borrarcla.png" width="20" height="20" name="borrar"></a>&nbsp;
    if (x%2)==0
     <tr class="par">   
