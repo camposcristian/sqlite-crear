@@ -20,7 +20,7 @@ router.post('/', function (req, res) {
 	if (req.body.type === 'on') {
 		var tipo = "admin";
 	} else {
-		tipo = "";
+		tipo = "normal";
 	};
 	if (password2 === password) {
 		login.serialize(function () {
