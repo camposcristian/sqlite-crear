@@ -44,7 +44,7 @@ $(document).ready(function() {
 		$('.info').empty()
 	});
 	$(".informe2").animate({
-   'width':'350px'
+   'width':'300pt'
 	})
 	 $(".informe2").animate({
    'height':'40pt'
