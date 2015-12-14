@@ -27,7 +27,7 @@ router.post('/', function (req, res) {
 	var fechanac = req.body.nac;
 	var empresa = req.body.empresa;
 	var dpto = req.body.dpto;
-	var acceso = boleano(req.body.acceso);
+	var acceso = boleano(req.body.acceso).toString();
 	var huella;
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
@@ -100,7 +100,7 @@ router.put('/:id', function (req, res) {
 	var fechanac = req.body.nac;
 	var empresa = req.body.empresa;
 	var dpto = req.body.dpto;
-	var acceso = boleano(req.body.acceso);
+	var acceso = boleano(req.body.acceso).toString();
 	var huella;
 	var user = localStorage.getItem('user');
     var ruta = "./database/" + user + "/personal.db";
