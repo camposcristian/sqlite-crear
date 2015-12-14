@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 		res.redirect('/');
 	}else{
 res.render(__dirname + '/../views/exportaremp',{fecha:fecha()});
-	}
+	};
 });
 router.post('/', function (req, res) {
 	select(function(database){
@@ -69,10 +69,8 @@ router.post('/', function (req, res) {
 			    nombre2=c+" Dato(s) exportados en .Db"; 			   
 			    });
 			 };
-			
 	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version});
-nombre2="";
-		
+nombre2="";	
 });
 });
 

@@ -46,14 +46,14 @@ router.post('/', function (req, res) {
 			fs.mkdirSync('./database/'+user, 0766, function (err) {
 				if (err) {
 					console.log(err);
-				}
+				};
 			});
-		}
+		};
 		res.redirect('/empleados');
 	};
 	function nuevousu() {
 		localStorage.setItem('admin', 'admin');
 		res.redirect('/users');
-	}
+	};
 });
 module.exports = router;

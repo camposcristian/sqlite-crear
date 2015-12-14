@@ -6,6 +6,6 @@ router.get('/', function (req, res) {
 	localStorage.removeItem('user');
 	localStorage.removeItem('password');
 	localStorage.removeItem('admin');
-	res.redirect('/')
+	res.redirect('/');
 });
 module.exports = router;

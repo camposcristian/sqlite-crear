@@ -5,8 +5,7 @@ module.exports = function calcula() {
 function cero(date) {
     if (date < 10) {
         return ("0" + date);
-    }
-    else {
+    } else {
         return date;
     }
 }

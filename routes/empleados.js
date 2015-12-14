@@ -33,7 +33,7 @@ router.post('/', function (req, res) {
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 		res.redirect('/');
-	}else{
+	} else {
 	var db = new sqlite3.Database(ruta);
 	insert();
 	function insert() {
@@ -44,7 +44,7 @@ router.post('/', function (req, res) {
 		var insertar = db.prepare("INSERT INTO personal VALUES (?,?,?,?,?,?,?,?,?,?)");
 		insertar.run(id, idusu, nombre, apellido, ci, fechanac, empresa, dpto, acceso, huella);
 		insertar.finalize();
-	}
+	};
 	nombre2 = "Empleado" + " " + nombre + " " + apellido + " " + "Añadido";
 	res.redirect('/empleados');
 	};
@@ -77,7 +77,7 @@ router.delete('/:id', function (req, res) {
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 		res.redirect('/');
-	}else{
+	} else {
 	var db = new sqlite3.Database(ruta);
 	db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
 		{ $idaux: id },
@@ -157,7 +157,7 @@ router.get('/editar/:id', function (req, res) {
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 		res.redirect('/');
-	}else{
+	} else {
 	var db = new sqlite3.Database(ruta);
 	db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
 		{ $idaux: id },
@@ -174,7 +174,7 @@ router.get('/nuevo', function (req, res) {
 	 var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 	res.redirect('/');
-	}else{
+	} else {
 	res.render(__dirname + '/../views/nuevoemp.jade', { 'fecha': fecha() });
 	};
 });
