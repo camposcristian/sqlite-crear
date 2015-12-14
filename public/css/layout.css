@@ -1,4 +1,3 @@
-
 .informe2{
 	width: 0px;
 	font-family:  Arial, Geneva, Helvetica, sans-serif;
@@ -21,8 +20,6 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   border:1px solid #7dc6dd;
-  
-
 }
 .botonlogin{
 	margin-left:260px;
@@ -60,11 +57,9 @@
 		height: 10px;
 		left:10%;
 }
-
-
 .enlace2{
 text-align:center;	
-left:89%;
+right:2%;
 top:8px;
 position: fixed;
 border:4px solid;
@@ -74,15 +69,13 @@ border-color:#149c82;
 border-radius:15px;
 background-color:#E0E0E0;
 cursor:pointer;
- }
+}
 .enlace2 a{
 	text-decoration:none;
 	color:black;
 	font-size:13px;
 	font-family: Arial;
-	
 }
-
 .textoborrar{
 	margin-top:0px;
 	    width: 80%;
@@ -113,17 +106,12 @@ cursor:pointer;
 		background: url(../images/form-bg.png) top left;
 		padding: 8px 0 0 8px; 
 		}
-
 .form-bg2 form {	
 		width: 790px;
 		height: 570px;
 		background: #fff url(../images/bg_form.jpg) repeat-x top left;		
-		border-radius:9px;
-		
+		border-radius:9px;	
 	}
-
-
-
 .informe{
 		width: 80%;
 		text-align: center;	
@@ -135,38 +123,27 @@ cursor:pointer;
 		height: 60px;
 		left:10%;
 	}
-
 .enlace{
 border:0;
 font-size: 16px;
 background-color:#E0E0E0;
 text-decoration:underline;
 color:#000;
-cursor:pointer;}
-
-
+cursor:pointer;
+}
 .export{
-
 color:white;
 font-family:  Arial, Geneva, Helvetica, sans-serif;
 font-size: 14px;
 }
-
-
-
-
-
 .ver{
     text-align:right;
 	margin-right:20px;
 	color:white;
 	font-family:  Arial, Geneva, Helvetica, sans-serif;
-    font-size: 10px;
-	
-	
+    font-size: 10px;	
 }
-.imag{
-	 
+.imag{	 
 	    width: 140px;
 		border-right: 2px solid #149c82;
 		background:#E0E0E0;
@@ -176,16 +153,10 @@ font-size: 14px;
 		left:-15px;
 		border-radius:10px;
 	    border-bottom:2px solid #149c82;
-	
 }
-
-
 .par{
 	background:#E0E0E0;
 }
-
-
-
 .logo{
 	    width: 100px;
 		position: fixed;
@@ -193,8 +164,6 @@ font-size: 14px;
 		height: 25px;
 		left:10px;
 }
-
-
 .barra{
 	
 		width: 100%;
@@ -207,20 +176,13 @@ font-size: 14px;
 		font-weight: bold;
 		height:47px;
 		z-index:auto;
-		
-		
 	}
-	
-
 .bienvenido{
 	text-align:right;
-	margin-right:160px;
+	margin-right:12%;
 	color:white;
 	font-family:Arial, Geneva, Helvetica, sans-serif;
     font-size: 14px;
-	
-	
-	
 }
 .version{
 	text-align:right;
@@ -228,39 +190,26 @@ font-size: 14px;
 	color:white;
 	font-family:Arial, Geneva, Helvetica, sans-serif;
     font-size: 14px;
-	
-	
-	
 }
-
 .opciones{
-	width:85px;
-	
+	width:85px;	
 }
-
 .fecha{
 	width:120px;
-	
 }
 .id{
-	width:30px;
-	
+	width:30px;	
 }
-
-
 td{
 	width:150px;
 	height:25px;
 	font-family: Verdana, Arial, Geneva, Helvetica, sans-serif;
     font-size: 11px;
 }
-
-
 .tabla{
 	background-color:white;
 	margin-left: 70px;
 	border:solid;
-	
 }
 tr:first-child{
 background:#149c82;	
@@ -270,18 +219,11 @@ font-family:  Arial, Geneva, Helvetica, sans-serif;
 height:25px;
 font-size: 15px;
 }
-
-
 .cuerpo{
 	background: url(../images/bg.jpg) #444;
 		font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		color: #444; 
-
-}	
-	
-
-	
-	
+}		
 	h3{
 		width: 80%;
 		text-align: center;	
@@ -308,11 +250,8 @@ font-size: 15px;
 		top: 0;
 		font-size: 14px;
 		font-weight: bold;
-		height: 100px;
-		
+		height: 100px;	
 	}
-	
-	
 	.form-bg {
 		width: 370px;
 		height: 248px;
@@ -321,15 +260,12 @@ font-size: 15px;
 		background: url(../images/form-bg.png) top left;
 		padding: 8px 0 0 8px; 
 		}
-	
 	.form-bg form {
 		width: 360px;
 		height: 239px;
 		background: #fff url(../images/bg_form.jpg) repeat-x top left;		
-		border-radius:4px;
-		
+		border-radius:4px;		
 	}
-	
 	.form-bg form h2 {
 		font-size: 14px;
 		font-weight: bold;
@@ -341,7 +277,6 @@ font-size: 15px;
 		margin-bottom: 24px;
 		margin-left:25px;
 	}
-	
 	input[type="text"], input[type="password"], input[type="date"], input[type="number"]{
 		box-shadow: 0px 0px 0px 4px #f2f5f7;
 		width: 290px;
@@ -351,7 +286,6 @@ font-size: 15px;
 		color: #444;
 		border: 1px solid #bec2c4;
 	}
-	
 	input[type="text"]:focus, input[type="password"]:focus,input[type="date"]:focus,input[type="number"]:focus{
 		border:1px solid #7dc6dd;
 	}
@@ -366,12 +300,9 @@ input.cidata{
 margin-left: 10px;
 width: 150px;
 }
-	
 	input[type="checkbox"] {
 		vertical-align: middle;
 	}
-	
-	
 	button {
 		width:82px;
 		height:32px;
@@ -379,35 +310,29 @@ width: 150px;
 		float: right;
 		margin-right: 24px;
 	}
-
 	button:hover {
 		width:82px;
 		height:32px;
 		border:0px;
 		float: right;
 		margin-right: 24px;
-	}
-	
+	}	
 	button:active {
 		width:82px;
 		height:32px;
 		border:0px;
 		float: right;
 		margin-right: 24px;
-	}	
-	
-	
+	}		
 	label {
 		display: inline;
 		margin-left: 24px;
 		vertical-align: middle;
-	}
-	
+	}	
 	label span {
 		color: 555555;
 		font-size: 12px;
 	}
-	
 	p.forgot {
 		text-align: center;
 		margin-top: 10px;
@@ -416,20 +341,14 @@ width: 150px;
 		font-size: 12px;
 		font-weight: bold;
 	}
-	
 	p.forgot a {
 		color: #cbebf6;
 		text-decoration: none;
 		transition: color 0.5s linear;
-		-moz-transition: color 0.5s linear;
-		-webkit-transition: color 0.5s linear;
-		-o-transition: color 0.5s linear;
 	}
-
 	p.forgot a:hover {
 		color: #65c4e5;
 	}
-
 	.titulo{    
 		width: 400px; 
 		height:100px;
@@ -438,8 +357,7 @@ width: 150px;
 		margin-right: 415px;
 		margin-top: 20px;
 		margin-left:415px;
-		padding: 0; 
-		
+		padding: 0; 	
 }
 	
 
