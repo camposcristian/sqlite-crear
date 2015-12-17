@@ -25,22 +25,22 @@ router.post('/', function (req, res) {
 					if (row.password === password) {
 					 localStorage.setItem('admin', row.Admin);
 					 console.log(row.Admin)
-							validado();	
+							crearUsuario() ;	
 					} else {
-						novalidado();
+						mostrarError();
 					};
 				};
 			}, function (err, rows) {
 				if (rows === 0) {
-					novalidado();
+					mostrarError();
 				};
 			});
 	});
-	function novalidado() {
+	function mostrarError() {
 		router.engine('html', ejs.__express);
 		res.render('index.html', { title: "Usuario o contraseña no valida, intente nuevamente" });
 	};
-	function validado() {
+	function crearUsuario(){
 		if (!fs.existsSync('./database/'+user)) {
 			fs.mkdirSync('./database/'+user, 0766, function (err) {
 				if (err) {

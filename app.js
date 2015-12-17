@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override')
 console.log("Versión "+pjson.version);
 
-var users = require('./routes/users');
+var usuarios = require('./routes/usuarios');
 var empleados = require('./routes/empleados');
 var login = require('./routes/login');
 var exportar = require('./routes/exportar');
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use('/users', users);
+app.use('/usuarios', usuarios);
 app.use('/empleados', empleados);
 app.use('/login', login);
 app.use('/cierresesion', cierresesion);
