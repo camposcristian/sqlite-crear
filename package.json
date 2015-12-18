@@ -1,21 +1,40 @@
 {
-  "name": "sqlite",
+  "name": "sqlite-crear",
   "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
+  "description": "",
+  "main": "app.js",
   "dependencies": {
-    "body-parser": "~1.13.2",
-    "cookie-parser": "~1.3.5",
-    "debug": "~2.2.0",
+    "body-parser": "^1.13.3",
+    "cookie-parser": "^1.3.5",
+    "debug": "^2.2.0",
     "ejs": "^2.3.4",
-    "express": "~4.13.1",
-    "jade": "~1.11.0",
-    "morgan": "~1.6.1",
+    "express": "^4.13.3",
+    "http": "^0.0.0",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1",
+    "async": "^1.5.0",
+    "jade": "^1.11.0",
+    "serve-favicon": "^2.3.0",
+    "net": "^1.0.2",
+    "sqlite3": "^3.1.1",
     "node-localstorage": "^0.6.0",
-    "serve-favicon": "~2.3.0",
-    "sessionstorage": "0.0.1",
-    "sqlite3": "^3.1.1"
-  }
+    "mongoose": "^4.2.2",
+    "sessionstorage": "^0.0.1",
+    "fs": "^0.0.2",
+    "html": "^0.0.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camposcristianeze/sqlite-crear.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/camposcristianeze/sqlite-crear/issues"
+  },
+  "homepage": "https://github.com/camposcristianeze/sqlite-crear#readme"
 }
