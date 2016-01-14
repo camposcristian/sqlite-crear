@@ -9,31 +9,31 @@ var c=0;
 var pjson = require('../package.json');
 var sqlite3 = require('sqlite3').verbose();
 var max = 0;
-var fecha = require('./utiles/fecha.js');
-var select = require('./utiles/consultas.js');
+var obtenerFecha = require('./utiles/fecha.js');
+var obtenerEmpleados = require('./utiles/consultas.js');
 router.get('/', function (req, res) {
 	var user = localStorage.getItem('user');
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 		res.redirect('/');
 	}else{
-res.render(__dirname + '/../views/exportaremp',{fecha:fecha()});
+res.render(__dirname + '/../views/exportaremp',{fecha: obtenerFecha()});
 	};
 });
 router.post('/', function (req, res) {
-	select(function(database){
+	obtenerEmpleados(function(database){
 		max=(database.length);	
 		var desde = req.body.desde;
 		var hasta = req.body.hasta;
 		if (desde>hasta){
 			nombre2="Fecha inicial no puede ser mayor que fecha final";
 		};	
-		function suma1(){
+		function obtenerSuma(){
 			var dates=new Date(hasta);
-			return dates.getFullYear() + "-" + cero((dates.getMonth() + 1)) + "-" + cero((dates.getDate() +1));		
+			return dates.getFullYear() + "-" + agregarCero((dates.getMonth() + 1)) + "-" + agregarCero((dates.getDate() +1));		
 		};
 		if (hasta>=desde && req.body.formato==="txt"){
-			 hasta2=suma1(hasta);
+			 hasta2=obtenerSuma(hasta);
 			c=0;
 			var user=localStorage.getItem('user');
 			var ruta2="./database/"+user+"/database.txt";
@@ -51,7 +51,7 @@ router.post('/', function (req, res) {
 		 };
 			 if(hasta>=desde && req.body.formato==="Db"){ 
 			  c=0;
-			  hasta2=suma1(hasta);
+			  hasta2=obtenerSuma(hasta);
 			  var user=localStorage.getItem('user');
 			  var ruta3="./database/"+user+"/exportados.db";
 			  var exporta = new sqlite3.Database(ruta3);
@@ -74,7 +74,7 @@ nombre2="";
 });
 });
 
- function cero(date) {
+ function agregarCero(date) {
         if (date < 10) {
             return ("0" + date);
         } else {
