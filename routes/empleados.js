@@ -51,11 +51,8 @@ router.post('/', function (req, res) {
 });
 //get /empleados
 router.get('/', function (req, res) {
-	if (typeof localStorage === "undefined" || localStorage === null) {
-		var LocalStorage = require('node-localstorage').LocalStorage;
-		localStorage = new LocalStorage('./scratch');
-	};
-	var user = localStorage.getItem('user');
+	var user = user;
+	console.log(user);
 	var admin = localStorage.getItem('admin');
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
