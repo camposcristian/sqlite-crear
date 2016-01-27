@@ -1,6 +1,5 @@
 var express = require('express');
-var router = express();
-var bodyParser = require('body-parser');
+var app = express();
 var database = [];
 var max = 0;
 var obtenerBoleano2 = require('./utiles/boleano2.js');
@@ -13,8 +12,8 @@ var obtenerFecha = require('./utiles/fecha.js');
 var obtenerPersonal = require('./utiles/consultas.js');
 var obtenerBoleano = require('./utiles/boleano.js');
 
-//post empleados/id
-router.post('/', function (req, res) {
+
+app.post('/', function (req, res) {
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
 	if (req.body.id != 0) {
@@ -29,7 +28,7 @@ router.post('/', function (req, res) {
 	var dpto = req.body.dpto;
 	var acceso = obtenerBoleano(req.body.acceso).toString();
 	var huella;
-	var user = localStorage.getItem('user');
+	var user = "Crear";
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -50,10 +49,12 @@ router.post('/', function (req, res) {
 	};
 });
 //get /empleados
-router.get('/', function (req, res) {
-	var user = user;
-	console.log(user);
-	var admin = localStorage.getItem('admin');
+app.get('/', function (req, res) {
+	var user = "Crear";
+	console.log(req);
+	console.log(req.user);
+	console.log(req.username);
+	var admin = 'admin';
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -69,9 +70,9 @@ router.get('/', function (req, res) {
 	};
 });
 //delete empleados/id
-router.delete('/:id', function (req, res) {
+app.delete('/:id', function (req, res) {
 	var id = req.params.id;
-	var user = localStorage.getItem('user');
+	var user = "Crear"
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -89,7 +90,7 @@ router.delete('/:id', function (req, res) {
 	};
 });
 //put empleados/id
-router.put('/:id', function (req, res) {
+app.put('/:id', function (req, res) {
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
 	var id = req.params.id;
@@ -100,7 +101,7 @@ router.put('/:id', function (req, res) {
 	var dpto = req.body.dpto;
 	var acceso = obtenerBoleano(req.body.acceso).toString();
 	var huella;
-	var user = localStorage.getItem('user');
+	var user = "Crear";
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -131,9 +132,9 @@ router.put('/:id', function (req, res) {
 	};
 });
 // get confirmar eliminacion
-router.get('/confirmar/:id', function (req, res) {
+app.get('/confirmar/:id', function (req, res) {
 	var id = req.params.id;
-	var user = localStorage.getItem('user');
+	var user = "Crear";
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -149,9 +150,9 @@ router.get('/confirmar/:id', function (req, res) {
 	};
 });
 // get menu edicion
-router.get('/editar/:id', function (req, res) {
+app.get('/editar/:id', function (req, res) {
 	var id = req.params.id;
-	var user = localStorage.getItem('user');
+	var user = "Crear";
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -167,8 +168,8 @@ router.get('/editar/:id', function (req, res) {
 	};
 });
 // get menu nuevo 
-router.get('/nuevo', function (req, res) {
-	var user = localStorage.getItem('user');
+app.get('/nuevo', function (req, res) {
+	var user = "Crear";
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -176,4 +177,4 @@ router.get('/nuevo', function (req, res) {
 		res.render(__dirname + '/../views/nuevoemp.jade', { 'fecha': obtenerFecha() });
 	};
 });
-module.exports = router;
+module.exports = app;

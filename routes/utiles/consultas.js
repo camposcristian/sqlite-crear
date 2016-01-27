@@ -1,10 +1,6 @@
 module.exports = function select(callback) {
 	var sqlite3 = require('sqlite3').verbose();
-	if (typeof localStorage === "undefined" || localStorage === null) {
-		var LocalStorage = require('node-localstorage').LocalStorage;
-		localStorage = new LocalStorage('./scratch');
-	};
-	var user = localStorage.getItem('user');
+	var user = "Crear";
 	var ruta = "./database/" + user + "/personal.db";
 	var db = new sqlite3.Database(ruta);
 	db.serialize(function () {

@@ -7,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override')
 console.log("Versión "+pjson.version);
-
 var usuarios = require('./routes/usuarios');
 var empleados = require('./routes/empleados');
 var login = require('./routes/login');
@@ -21,10 +20,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 
 app.use(methodOverride(function(req, res){
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -82,5 +82,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(3000);
+var port = process.env.PORT || 1337;
+app.listen(port);
 module.exports = app;
