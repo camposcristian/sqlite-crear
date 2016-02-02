@@ -28,7 +28,7 @@ app.post('/', function (req, res) {
 	var dpto = req.body.dpto;
 	var acceso = obtenerBoleano(req.body.acceso).toString();
 	var huella;
-	var user = "Crear";
+	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -50,15 +50,13 @@ app.post('/', function (req, res) {
 });
 //get /empleados
 app.get('/', function (req, res) {
-	var user = "Crear";
-	console.log(req);
-	console.log(req.user);
-	console.log(req.username);
+	var user = req.user.username;
 	var admin = 'admin';
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
 	} else {
+		//en esta parte va a hacer un select de la base de datos en el archivo consultas que esta en utiles, pero no se como pasarle la ruta en la funcion. ahora esta definida manualmente la ruta para prueba
 		obtenerPersonal(function (database) {
 			max = (database.length);
 			if (nombre2 === "") {
@@ -72,7 +70,7 @@ app.get('/', function (req, res) {
 //delete empleados/id
 app.delete('/:id', function (req, res) {
 	var id = req.params.id;
-	var user = "Crear"
+	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -101,7 +99,7 @@ app.put('/:id', function (req, res) {
 	var dpto = req.body.dpto;
 	var acceso = obtenerBoleano(req.body.acceso).toString();
 	var huella;
-	var user = "Crear";
+	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -134,7 +132,7 @@ app.put('/:id', function (req, res) {
 // get confirmar eliminacion
 app.get('/confirmar/:id', function (req, res) {
 	var id = req.params.id;
-	var user = "Crear";
+	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -152,7 +150,7 @@ app.get('/confirmar/:id', function (req, res) {
 // get menu edicion
 app.get('/editar/:id', function (req, res) {
 	var id = req.params.id;
-	var user = "Crear";
+	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -169,7 +167,7 @@ app.get('/editar/:id', function (req, res) {
 });
 // get menu nuevo 
 app.get('/nuevo', function (req, res) {
-	var user = "Crear";
+	var user = req.user.username;
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
