@@ -56,15 +56,14 @@ app.get('/', function (req, res) {
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
 	} else {
-		//en esta parte va a hacer un select de la base de datos en el archivo consultas que esta en utiles, pero no se como pasarle la ruta en la funcion. ahora esta definida manualmente la ruta para prueba
 		obtenerPersonal(function (database) {
 			max = (database.length);
 			if (nombre2 === "") {
 				nombre2 = "Bienvenido " + user;
 			}
-			res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version, admin: admin });
+			res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version, admin: admin, user:user });
 			nombre2 = "";
-		});
+		},ruta);
 	};
 });
 //delete empleados/id
