@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override')
 console.log("Versión "+pjson.version);
@@ -12,9 +11,18 @@ var empleados = require('./routes/empleados');
 var login = require('./routes/login');
 var exportar = require('./routes/exportar');
 var cierresesion = require('./routes/cierresesion');
-
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 var app = express();
+
+app.use(express.static('public'));
+app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
