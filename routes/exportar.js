@@ -12,7 +12,7 @@ var max = 0;
 var obtenerFecha = require('./utiles/fecha.js');
 var obtenerEmpleados = require('./utiles/consultas.js');
 router.get('/', function (req, res) {
-	var user = localStorage.getItem('user');
+	var user=req.user.username
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 		res.redirect('/');
