@@ -11,8 +11,6 @@ var sqlite3 = require('sqlite3').verbose();
 var obtenerFecha = require('./utiles/fecha.js');
 var obtenerPersonal = require('./utiles/consultas.js');
 var obtenerBoleano = require('./utiles/boleano.js');
-
-
 app.post('/', function (req, res) {
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
@@ -51,7 +49,7 @@ app.post('/', function (req, res) {
 //get /empleados
 app.get('/', function (req, res) {
 	var user = req.user.username;
-	var admin = 'admin';
+	var admin = req.user.admin;
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');

@@ -22,6 +22,7 @@ res.render(__dirname + '/../views/exportaremp',{fecha: obtenerFecha()});
 });
 router.post('/', function (req, res) {
 	var user=req.user.username;
+	var admin = req.user.admin;
 	var ruta = "./database/" + user + "/personal.db";
 	obtenerEmpleados(function(database){
 		max=(database.length);	
@@ -71,7 +72,7 @@ router.post('/', function (req, res) {
 			    nombre2=c+" Dato(s) exportados en .Db"; 			   
 			    });
 			 };
-	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version,user:user});
+	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version,user:user,admin:admin});
 nombre2="";	
 },ruta);
 });
