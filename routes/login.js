@@ -8,13 +8,6 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
 
 
-app.use(require('serve-static')(__dirname + '/../../public'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-
 function hashPassword(password, salt) {
   var hash = crypto.createHash('sha256');
   hash.update(password);

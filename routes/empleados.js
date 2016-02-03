@@ -11,6 +11,8 @@ var sqlite3 = require('sqlite3').verbose();
 var obtenerFecha = require('./utiles/fecha.js');
 var obtenerPersonal = require('./utiles/consultas.js');
 var obtenerBoleano = require('./utiles/boleano.js');
+
+//post empleados/id
 app.post('/', function (req, res) {
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
