@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
 	var username = req.body.username;
-	var responsable=req.user.username;
+	var responsable = req.user.username;
 	var id;
 	var password = req.body.password;
 	var password2 = req.body.password2;
@@ -23,15 +23,18 @@ router.post('/', function (req, res) {
 		tipo = "normal";
 	};
 	if (password2 === password) {
+		if (password.length < 5) {
+			res.render(__dirname + '/../views/registrausu.jade', { info: 'Contraseña muy corta' });
+		}else{
 		login.serialize(function () {
 			var borrar = login.prepare("DELETE FROM users WHERE username=(?)");
 			borrar.run(username);
 			borrar.finalize();
 			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?,?,?,?)");
-			insertar.run(id,username, password,1,tipo, responsable);
+			insertar.run(id, username, password, 1, tipo, responsable);
 			insertar.finalize();
 			res.render(__dirname + '/../views/registrausu.jade', { info: 'Usuario ' + username + ' registrado' });
-		});
+		})};
 	} else {
 		res.render(__dirname + '/../views/registrausu.jade', { info: 'Contraseñas no coinciden' });
 	};
