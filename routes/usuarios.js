@@ -3,8 +3,7 @@ var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 var login = new sqlite3.Database('./database/Users.sqlite');
 router.get('/', function (req, res) {
-	var LocalStorage = require('node-localstorage').LocalStorage;
-	var admin = localStorage.getItem('admin');
+	var admin = req.user.admin;
 	if (admin === 'admin') {
 		res.render(__dirname + '/../views/registrausu.jade');
 	} else {
@@ -13,8 +12,9 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-	var usuario = req.body.username;
-	var responsable=localStorage.getItem('user');
+	var username = req.body.username;
+	var responsable=req.user.username;
+	var id;
 	var password = req.body.password;
 	var password2 = req.body.password2;
 	if (req.body.type === 'on') {
@@ -24,13 +24,13 @@ router.post('/', function (req, res) {
 	};
 	if (password2 === password) {
 		login.serialize(function () {
-			var borrar = login.prepare("DELETE FROM users WHERE user=(?)");
-			borrar.run(usuario);
+			var borrar = login.prepare("DELETE FROM users WHERE username=(?)");
+			borrar.run(username);
 			borrar.finalize();
-			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?,?)");
-			insertar.run(usuario, password, tipo, responsable);
+			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?,?,?,?)");
+			insertar.run(id,username, password,1,tipo, responsable);
 			insertar.finalize();
-			res.render(__dirname + '/../views/registrausu.jade', { info: 'Usuario ' + usuario + ' registrado' });
+			res.render(__dirname + '/../views/registrausu.jade', { info: 'Usuario ' + username + ' registrado' });
 		});
 	} else {
 		res.render(__dirname + '/../views/registrausu.jade', { info: 'Contraseñas no coinciden' });
