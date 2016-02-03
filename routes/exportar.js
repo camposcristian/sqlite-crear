@@ -12,7 +12,7 @@ var max = 0;
 var obtenerFecha = require('./utiles/fecha.js');
 var obtenerEmpleados = require('./utiles/consultas.js');
 router.get('/', function (req, res) {
-	var user=req.user.username
+	var user=req.user.username;
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta==="./database/null/personal.db"){
 		res.redirect('/');
@@ -21,6 +21,8 @@ res.render(__dirname + '/../views/exportaremp',{fecha: obtenerFecha()});
 	};
 });
 router.post('/', function (req, res) {
+	var user=req.user.username;
+	var ruta = "./database/" + user + "/personal.db";
 	obtenerEmpleados(function(database){
 		max=(database.length);	
 		var desde = req.body.desde;
@@ -35,7 +37,7 @@ router.post('/', function (req, res) {
 		if (hasta>=desde && req.body.formato==="txt"){
 			 hasta2=obtenerSuma(hasta);
 			c=0;
-			var user=localStorage.getItem('user');
+			var user=req.user.username;
 			var ruta2="./database/"+user+"/database.txt";
 	 for (var x = 0; x < max; x++){
 		 if(database[x].idusuario>=desde && hasta2>=database[x].idusuario){
@@ -52,7 +54,7 @@ router.post('/', function (req, res) {
 			 if(hasta>=desde && req.body.formato==="Db"){ 
 			  c=0;
 			  hasta2=obtenerSuma(hasta);
-			  var user=localStorage.getItem('user');
+			  var user=req.user.username;
 			  var ruta3="./database/"+user+"/exportados.db";
 			  var exporta = new sqlite3.Database(ruta3);
 			   exporta.serialize(function () {
@@ -69,9 +71,9 @@ router.post('/', function (req, res) {
 			    nombre2=c+" Dato(s) exportados en .Db"; 			   
 			    });
 			 };
-	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version});
+	res.render(__dirname + '/../views/listaemp', {vector:database,max:max,nombre2:nombre2,version: pjson.version,user:user});
 nombre2="";	
-});
+},ruta);
 });
 
  function agregarCero(date) {
