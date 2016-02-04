@@ -52,17 +52,14 @@ app.post('/', function (req, res) {
 //get /empleados
 app.get('/', function (req, res) {	 
 	var user = req.user.username;
-	var admin = req.user.admin;
-	
+	var admin = req.user.admin;	
 		if (!fs.existsSync('./database/'+user)) {
  			fs.mkdirSync('./database/'+user, 0766, function (err) {
  				if (err) {
  					console.log(err);
- 				}
+ 				};
  			});
 		};
-	
-	
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');

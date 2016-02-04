@@ -6,8 +6,6 @@ var LocalStrategy = require('passport-local').Strategy;
 var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
-
-
 function hashPassword(password, salt) {
   var hash = crypto.createHash('sha256');
   hash.update(password);
