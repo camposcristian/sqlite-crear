@@ -11,6 +11,7 @@ var sqlite3 = require('sqlite3').verbose();
 var obtenerFecha = require('./utiles/fecha.js');
 var obtenerPersonal = require('./utiles/consultas.js');
 var obtenerBoleano = require('./utiles/boleano.js');
+var fs = require('fs');
 
 //post empleados/id
 app.post('/', function (req, res) {
@@ -49,9 +50,19 @@ app.post('/', function (req, res) {
 	};
 });
 //get /empleados
-app.get('/', function (req, res) {
+app.get('/', function (req, res) {	 
 	var user = req.user.username;
 	var admin = req.user.admin;
+	
+		if (!fs.existsSync('./database/'+user)) {
+ 			fs.mkdirSync('./database/'+user, 0766, function (err) {
+ 				if (err) {
+ 					console.log(err);
+ 				}
+ 			});
+		};
+	
+	
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
