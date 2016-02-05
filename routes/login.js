@@ -6,6 +6,14 @@ var LocalStrategy = require('passport-local').Strategy;
 var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
+
+//app.post('/',function(req,res){
+ // var passedVariable=req.query.valid;
+ // console.log(passedVariable);
+ // res.render(__dirname + '/../public/index', { min: passedVariable });
+//});
+
+
 function hashPassword(password, salt) {
   var hash = crypto.createHash('sha256');
   hash.update(password);
@@ -18,7 +26,6 @@ passport.use(new LocalStrategy(function (username, password, done) {
     var hash = hashPassword(password, row.salt);
     db.get('SELECT username, id FROM users WHERE username = ? AND password = ?', username, hash, function (err, row) {
       if (!row) return done(null, false);
-      // console.log(row)
       return done(null, row);
     });
   });
@@ -33,5 +40,5 @@ passport.deserializeUser(function (id, done) {
   });
 });
 app.post('/', passport.authenticate('local', { successRedirect: '/empleados',
-                                                    failureRedirect: '/' }));
+                                                    failureRedirect: '/?valid=false' }));
 module.exports = app;
