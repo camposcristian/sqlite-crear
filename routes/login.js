@@ -7,11 +7,9 @@ var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
 
-//app.post('/',function(req,res){
- // var passedVariable=req.query.valid;
- // console.log(passedVariable);
- // res.render(__dirname + '/../public/index', { min: passedVariable });
-//});
+app.get('/',function(req,res){
+  res.render(__dirname + '/../views/index');
+});
 
 
 function hashPassword(password, salt) {

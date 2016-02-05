@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override')
-console.log("Versión "+pjson.version);
+console.log("Versión " + pjson.version);
 var usuarios = require('./routes/usuarios');
 var empleados = require('./routes/empleados');
 var login = require('./routes/login');
@@ -29,12 +29,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
 
-app.use(methodOverride(function(req, res){
+app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
     // look in urlencoded POST bodies and delete it
     var method = req.body._method;
@@ -57,11 +58,20 @@ app.use('/cierresesion', cierresesion);
 app.use('/exportar', exportar);
 
 
+app.get('/', function (req, res) {
+  if (req.user) {
+    res.redirect('/empleados');
+  } else {
+    res.redirect('/login');
+  };
+});
+
+
 
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -72,7 +82,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -83,13 +93,14 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
     error: {}
   });
 });
+
 
 var port = process.env.PORT || 1337;
 app.listen(port);
