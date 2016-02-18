@@ -13,6 +13,7 @@ var obtenerPersonal = require('./utiles/consultas.js');
 var obtenerBoleano = require('./utiles/boleano.js');
 var fs = require('fs');
 
+
 //post empleados/id
 app.post('/', function (req, res) {
 	var nombre = req.body.username;

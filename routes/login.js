@@ -7,11 +7,15 @@ var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
 
+//get no validado
+app.get('/novalidado', function (req, res) {
+	res.render(__dirname + '/../views/index', { 'mensaje': "Usuario o Contraseña incorrecta"});
+});
+
+//get index
 app.get('/',function(req,res){
   res.render(__dirname + '/../views/index');
 });
-
-
 function hashPassword(password, salt) {
   var hash = crypto.createHash('sha256');
   hash.update(password);
@@ -38,5 +42,5 @@ passport.deserializeUser(function (id, done) {
   });
 });
 app.post('/', passport.authenticate('local', { successRedirect: '/empleados',
-                                                    failureRedirect: '/?valid=false' }));
+                                                    failureRedirect: '/login/novalidado' }));
 module.exports = app;

@@ -59,12 +59,14 @@ app.use('/exportar', exportar);
 
 
 app.get('/', function (req, res) {
-  if (req.user) {
-    res.redirect('/empleados');
-  } else {
-    res.redirect('/login');
-  };
+ // if (req.user){
+   // res.redirect('/login')
+  //}else{
+   // res.redirect('/empleados');
+  //}
+  res.redirect('/login')
 });
+
 
 
 
