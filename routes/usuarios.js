@@ -5,7 +5,8 @@ var sqlite3 = require('sqlite3').verbose();
 var login = new sqlite3.Database('./database/Users.sqlite');
 
 router.get('/contrasena', function (req, res) {
-	console.log("test")
+	var usuario = req.user.username;
+	res.render(__dirname + '/../views/contrasena.jade', { usuario: usuario });
 });
 
 router.get('/', function (req, res) {
@@ -18,8 +19,8 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-	var username = req.body.username;
 	var responsable = req.user.username;
+	var username = req.body.username;
 	var id;
 	var password = req.body.password;
 	var password2 = req.body.password2;
@@ -32,7 +33,12 @@ router.post('/', function (req, res) {
 	};
 	if (password2 === password) {
 		if (password.length < 5) {
-			res.render(__dirname + '/../views/registrausu.jade', { info: 'Contraseña muy corta' });
+			if (username===responsable){
+			res.render(__dirname + '/../views/contrasena.jade', { info: 'Contraseña muy corta', usuario: username });
+			}else{
+			res.render(__dirname + '/../views/registrausu.jade', { info: 'Contraseña muy corta'});
+			};
+			
 		}else{
 		 
 var hash = hashPassword(password, salt);	
@@ -50,10 +56,18 @@ function hashPassword(password, salt) {
 			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?,?,?,?)");
 			insertar.run(id, username, hash, salt, tipo, responsable);
 			insertar.finalize();
+			if (username===responsable){
+			res.render(__dirname + '/../views/index.jade', { mensaje: 'Contraseña cambiada' });
+			}else{
 			res.render(__dirname + '/../views/registrausu.jade', { info: 'Usuario ' + username + ' registrado' });
+			};
 		})};
 	} else {
-		res.render(__dirname + '/../views/registrausu.jade', { info: 'Contraseñas no coinciden' });
+		if (username===responsable){
+			res.render(__dirname + '/../views/contrasena.jade', { info: 'Contraseñas no coinciden', usuario: username });
+			}else{
+			res.render(__dirname + '/../views/registrausu.jade', { info: 'Contraseñas no coinciden' });
+			};
 	};
 });
 

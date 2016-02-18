@@ -1,0 +1,34 @@
+<html> 
+<head> 
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../css/layout.css">
+
+</head>
+<body class="cuerpo">
+<div class="container">
+<div class="form-bg2">
+<form method="post" action="/usuarios" name="form" >
+<br>
+<p class="borrar">Cambiar Contraseña</p>
+br
+h3 #{info}
+<div class="textoeditar">
+br
+br
+br
+p Usuario: &nbsp; &nbsp;#{usuario}
+<input type="hidden" name="username"  class="nomdata" value="#{usuario}" maxlength="20" readonly/>
+p Nuevo Password:<input type="password" name="password" class="cidata"required maxlength="20"/>
+p Confirmar Password:<input type="password" name="password2" class="cidata"required maxlength="20"/>
+br
+br
+br
+br
+br
+br
+br
+
+p &nbsp; &nbsp; <input type="submit" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=/./empleados class="btn">Volver</a>
+</form>
+
+
