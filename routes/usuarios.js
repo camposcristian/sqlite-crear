@@ -3,6 +3,11 @@ var crypto = require('crypto');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 var login = new sqlite3.Database('./database/Users.sqlite');
+
+router.get('/contrasena', function (req, res) {
+	console.log("test")
+});
+
 router.get('/', function (req, res) {
 	var admin = req.user.admin;
 	if (admin === 'admin') {
