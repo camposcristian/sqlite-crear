@@ -25,7 +25,7 @@ router.post('/', function (req, res) {
 	var password = req.body.password;
 	var password2 = req.body.password2;
 	var salt="Crear2016"
-	
+	var admin = req.user.admin;
 	if (req.body.type === 'on') {
 		var tipo = "admin";
 	} else {
@@ -54,7 +54,11 @@ function hashPassword(password, salt) {
 			borrar.run(username);
 			borrar.finalize();
 			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?,?,?,?)");
-			insertar.run(id, username, hash, salt, tipo, responsable);
+			if(username===responsable){
+			insertar.run(id, username, hash, salt, admin, responsable);
+			}else{
+			insertar.run(id, username, hash, salt, tipo, responsable);	
+			};
 			insertar.finalize();
 			if (username===responsable){
 			res.render(__dirname + '/../views/index.jade', { mensaje: 'Contraseña cambiada' });
