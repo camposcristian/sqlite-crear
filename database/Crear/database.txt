@@ -22,3 +22,4 @@
 5012,2016-02-19,alexis,granja,5170808,1990-01-01,1,1,true,Sin Enrolar
 5012,2016-02-19,alexis,granja,5170808,1990-01-01,1,1,true,Sin Enrolar
 5012,2016-02-19,alexis,granja,5170808,1990-01-01,1,1,true,Sin Enrolar
+5012,2016-02-19,alexis,granja,5170808,1990-01-01,1,1,true,Sin Enrolar
