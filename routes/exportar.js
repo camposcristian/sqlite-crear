@@ -33,7 +33,7 @@ router.post('/', function (req, res) {
 		};	
 		function obtenerSuma(){
 			var dates=new Date(hasta);
-			return dates.getFullYear() + "-" + agregarCero((dates.getMonth() + 1)) + "-" + agregarCero((dates.getDate() +1));		
+			return dates.getFullYear() + "-" + agregarCero((dates.getMonth() + 1)) + "-" + agregarCero((dates.getDate()));		
 		};
 		if (hasta>=desde && req.body.formato==="txt"){
 			 hasta2=obtenerSuma(hasta);
