@@ -3,11 +3,27 @@ var crypto = require('crypto');
 var passport = require('passport');
 var path =require('path');
 var LocalStrategy = require('passport-local').Strategy;
+var BasicStrategy= require('passport-http').Strategy;
 var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
-
-//get no validado
+//estrategia para http
+app.get('/api',
+  passport.authenticate('basic', { session: false }),
+  function(req, res) {
+    res.json(req.user);
+  }); 
+  passport.use(new BasicStrategy(function(username, password, done) {
+ db.get('SELECT salt FROM users WHERE username = ?', username, function (err, row) {
+    if (!row) return done(null, false);
+    var hash = hashPassword(password, row.salt);
+    db.get('SELECT username, id FROM users WHERE username = ? AND password = ?', username, hash, function (err, row) {
+      if (!row) return done(null, false);
+      return done(null, row);
+    });
+  });
+}));
+ //get no validado
 app.get('/novalidado', function (req, res) {
 	res.render(__dirname + '/../views/index', { 'mensaje': "Usuario o Contraseña incorrecta"});
 });
