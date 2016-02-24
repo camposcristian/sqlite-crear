@@ -8,8 +8,7 @@ var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
 //estrategia para http
-app.get('/api',
-  passport.authenticate('basic', { session: false }),
+app.get('/api',passport.authenticate('basic', { session: false }),
   function(req, res) {
     res.json(req.user);
   }); 
@@ -48,6 +47,10 @@ passport.use(new LocalStrategy(function (username, password, done) {
     });
   });
 }));
+
+
+
+
 passport.serializeUser(function (user, done) {
   return done(null, user.id);
 });
