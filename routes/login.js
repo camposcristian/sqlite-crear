@@ -10,6 +10,7 @@ var db = new sqlite3.Database('./database/Users.sqlite');
 //estrategia para http
 app.post('/api',passport.authenticate('basic', { session: false }),
   function(req, res) {
+    console.log(req.user);
     res.json(req.user);
   }); 
   passport.use(new BasicStrategy(function(username, password, done) {
