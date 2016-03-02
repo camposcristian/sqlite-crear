@@ -12,10 +12,16 @@ var obtenerFecha = require('./utiles/fecha.js');
 var obtenerPersonal = require('./utiles/consultas.js');
 var obtenerBoleano = require('./utiles/boleano.js');
 var fs = require('fs');
+var passport = require('passport');
 
+//para api
+app.post('/api', passport.authenticate('basic', { session: true }),
+	nuevoEmpleado
+	); 
 
-//post empleados/id
-app.post('/', function (req, res) {
+//post empleados
+app.post('/', nuevoEmpleado);
+function nuevoEmpleado(req, res) {
 	var nombre = req.body.username;
 	var apellido = req.body.apellido;
 	if (req.body.id != 0) {
@@ -49,18 +55,19 @@ app.post('/', function (req, res) {
 		nombre2 = "Empleado" + " " + nombre + " " + apellido + " " + "Añadido";
 		res.redirect('/empleados');
 	};
-});
+};
+
 //get /empleados
-app.get('/', function (req, res) {	 
+app.get('/', function (req, res) {
 	var user = req.user.username;
-	var admin = req.user.admin;	
-		if (!fs.existsSync('./database/'+user)) {
- 			fs.mkdirSync('./database/'+user, 0766, function (err) {
- 				if (err) {
- 					console.log(err);
- 				};
- 			});
-		};
+	var admin = req.user.admin;
+	if (!fs.existsSync('./database/' + user)) {
+		fs.mkdirSync('./database/' + user, 0766, function (err) {
+			if (err) {
+				console.log(err);
+			};
+		});
+	};
 	var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
@@ -70,9 +77,9 @@ app.get('/', function (req, res) {
 			if (nombre2 === "") {
 				nombre2 = "Bienvenido " + user;
 			}
-			res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version, admin: admin, user:user });
+			res.render(__dirname + '/../views/listaemp', { vector: database, max: max, nombre2: nombre2, version: pjson.version, admin: admin, user: user });
 			nombre2 = "";
-		},ruta);
+		}, ruta);
 	};
 });
 //delete empleados/id
@@ -119,7 +126,7 @@ app.put('/:id', function (req, res) {
 				huella = row.huella;
 			}, function (err, rows) {
 				if (rows != 0) {
-				 insertarBd();
+					insertarBd();
 				};
 			});
 		function insertarBd() {

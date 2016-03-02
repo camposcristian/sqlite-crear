@@ -14,14 +14,18 @@ var cierresesion = require('./routes/cierresesion');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var cors=require('cors');
 
 var app = express();
 
+app.use(cors());
 app.use(express.static('public'));
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 
 // view engine setup
@@ -102,6 +106,7 @@ app.use(function (err, req, res, next) {
     error: {}
   });
 });
+
 
 
 var port = process.env.PORT || 1337;

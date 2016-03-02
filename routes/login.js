@@ -8,11 +8,11 @@ var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/Users.sqlite');
 //estrategia para http
-app.post('/api',passport.authenticate('basic', { session: false }),
-  function(req, res) {
-    console.log(req.user);
-    res.json(req.user);
-  }); 
+//app.post('/api',passport.authenticate('basic', { session: true}),
+ // function(req, res) {
+  //  console.log(req.user);
+  //  res.json(req.user);
+  //}); 
   passport.use(new BasicStrategy(function(username, password, done) {
  db.get('SELECT salt FROM users WHERE username = ?', username, function (err, row) {
     if (!row) return done(null, false);
