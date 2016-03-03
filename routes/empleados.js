@@ -36,7 +36,7 @@ function nuevoEmpleado(req, res) {
 	var dpto = req.body.dpto;
 	var acceso = obtenerBoleano(req.body.acceso).toString();
 	//var huella;
-    var huella=req.body.huella;
+    var huella=(req.body.huella).toString();
     console.log(huella);
 	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
