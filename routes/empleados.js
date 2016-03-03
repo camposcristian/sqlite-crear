@@ -198,7 +198,6 @@ app.get('/api/:id', passport.authenticate('basic', { session: true }),
 	obtener
 	); 
 
-//post empleados
 app.get(obtener);
 function obtener(req, res) {
 	var id = req.params.id;
@@ -211,8 +210,6 @@ function obtener(req, res) {
 		db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
 			{ $idaux: id },
 			function (err, row) {
-				console.log(row.nombre + " " + row.apellido);
-				var onoff = obtenerBoleano2(row.acceso);
 			return row;
 			});
 	};
