@@ -196,7 +196,7 @@ app.get('/nuevo', function (req, res) {
 
 // get edicion api
 app.get('/api/:id', function (req, res) {
-	var id = req.params.id;
+var id = req.params.id;
 	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
@@ -209,8 +209,7 @@ app.get('/api/:id', function (req, res) {
 				console.log(row.nombre + " " + row.apellido);
 				var onoff = obtenerBoleano2(row.acceso);
 				res.render(__dirname + '/../views/editaremp.jade', { 'vector': row, 'onoff': onoff });
-			return row
-            });
+			});
 	};
 });
 module.exports = app;
