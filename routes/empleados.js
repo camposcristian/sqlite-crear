@@ -160,6 +160,7 @@ app.get('/confirmar/:id', function (req, res) {
 			function (err, row) {
 				console.log(row.nombre + " " + row.apellido);
 				var onoff = obtenerBoleano2(row.acceso);
+                return row;
 				res.render(__dirname + '/../views/borraremp.jade', { 'vector': row, 'onoff': onoff });
 			});
 	};
@@ -194,22 +195,5 @@ app.get('/nuevo', function (req, res) {
 });
 
 
-// get edicion api
-app.get('/app/:id', function (req, res) {
-var id = req.params.id;
-	var user = req.user.username;
-    var ruta = "./database/" + user + "/personal.db";
-	if (ruta === "./database/null/personal.db") {
-		res.redirect('/');
-	} else {
-		var db = new sqlite3.Database(ruta);
-		db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
-			{ $idaux: id },
-			function (err, row) {
-				console.log(row.nombre + " " + row.apellido);
-				var onoff = obtenerBoleano2(row.acceso);
-				res.render(__dirname + '/../views/editaremp.jade', { 'vector': row, 'onoff': onoff });
-			});
-	};
-});
+
 module.exports = app;
