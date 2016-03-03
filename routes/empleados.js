@@ -195,7 +195,7 @@ app.get('/nuevo', function (req, res) {
 
 
 // get edicion api
-app.get('/api/:id', function (req, res) {
+app.get('/app/:id', function (req, res) {
 var id = req.params.id;
 	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
