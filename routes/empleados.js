@@ -194,7 +194,13 @@ app.get('/nuevo', function (req, res) {
 	};
 });
 //get  api info
-app.get('/api/:id', function (req, res) {
+app.get('/api', passport.authenticate('basic', { session: true }),
+	obtener
+	); 
+
+//post empleados
+app.get('/', obtener);
+function obtener(req, res) {
 	var id = req.params.id;
 	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
@@ -210,6 +216,6 @@ app.get('/api/:id', function (req, res) {
 			return row;
 			});
 	};
-});
+};
 
 module.exports = app;
