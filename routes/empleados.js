@@ -35,7 +35,9 @@ function nuevoEmpleado(req, res) {
 	var empresa = req.body.empresa;
 	var dpto = req.body.dpto;
 	var acceso = obtenerBoleano(req.body.acceso).toString();
-	var huella;
+	//var huella;
+    var huella=req.body.huella;
+    console.log(huella);
 	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
 	if (ruta === "./database/null/personal.db") {
@@ -47,7 +49,7 @@ function nuevoEmpleado(req, res) {
 			var borrar = db.prepare("DELETE FROM personal WHERE _id=(?)");
 			borrar.run(id);
 			borrar.finalize();
-			huella = "Sin Enrolar";
+		//	huella = "Sin Enrolar";
 			var insertar = db.prepare("INSERT INTO personal VALUES (?,?,?,?,?,?,?,?,?,?)");
 			insertar.run(id, idusu, nombre, apellido, ci, fechanac, empresa, dpto, acceso, huella);
 			insertar.finalize();
