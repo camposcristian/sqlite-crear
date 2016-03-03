@@ -194,12 +194,12 @@ app.get('/nuevo', function (req, res) {
 	};
 });
 //get  api info
-app.get('/api', passport.authenticate('basic', { session: true }),
+app.get('/api/:id', passport.authenticate('basic', { session: true }),
 	obtener
 	); 
 
 //post empleados
-app.get('/', obtener);
+app.get(obtener);
 function obtener(req, res) {
 	var id = req.params.id;
 	var user = req.user.username;
