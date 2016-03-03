@@ -193,7 +193,23 @@ app.get('/nuevo', function (req, res) {
 		res.render(__dirname + '/../views/nuevoemp.jade', { 'fecha': obtenerFecha() });
 	};
 });
-
-
+//get  api info
+app.get('/api/:id', function (req, res) {
+	var id = req.params.id;
+	var user = req.user.username;
+    var ruta = "./database/" + user + "/personal.db";
+	if (ruta === "./database/null/personal.db") {
+		res.redirect('/');
+	} else {
+		var db = new sqlite3.Database(ruta);
+		db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
+			{ $idaux: id },
+			function (err, row) {
+				console.log(row.nombre + " " + row.apellido);
+				var onoff = obtenerBoleano2(row.acceso);
+			return row;
+			});
+	};
+});
 
 module.exports = app;
