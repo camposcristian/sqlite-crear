@@ -207,9 +207,10 @@ app.get('/api/:id', function (req, res) {
 			{ $idaux: id },
 			function (err, row) {
 				console.log(row.nombre + " " + row.apellido);
-				var onoff = obtenerBoleano2(row.acceso)
-                return row
-			});
+				var onoff = obtenerBoleano2(row.acceso);
+				res.render(__dirname + '/../views/editaremp.jade', { 'vector': row, 'onoff': onoff });
+			return row
+            });
 	};
 });
 module.exports = app;
