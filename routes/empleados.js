@@ -195,14 +195,12 @@ app.get('/nuevo', function (req, res) {
 });
 //get  api info
 app.get('/api/:id', passport.authenticate('basic', { session: true }),
-	obtener
-	); 
-
-app.get(obtener);
 function obtener(req, res) {
 	var id = req.params.id;
+     console.log(id);
 	var user = req.user.username;
     var ruta = "./database/" + user + "/personal.db";
+    console.log(ruta);
 	if (ruta === "./database/null/personal.db") {
 		res.redirect('/');
 	} else {
@@ -210,9 +208,10 @@ function obtener(req, res) {
 		db.each("SELECT _id AS id,* FROM personal WHERE _id = $idaux",
 			{ $idaux: id },
 			function (err, row) {
-			return row;
+                console.log(row);
+			res.json(row); //esto faltaba
 			});
 	};
-};
+});
 
 module.exports = app;
