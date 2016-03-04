@@ -194,7 +194,7 @@ app.get('/nuevo', function (req, res) {
 	};
 });
 //get  api info
-app.get('/apps', passport.authenticate('basic', { session: true }),
+app.get('/apps:id', passport.authenticate('basic', { session: true }),
 	obtener
 	); 
 function obtener(req, res) {
