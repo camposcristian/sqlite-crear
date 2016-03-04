@@ -194,7 +194,9 @@ app.get('/nuevo', function (req, res) {
 	};
 });
 //get  api info
-app.get('/apps/:id', passport.authenticate('basic', { session: true }),
+app.get('/apps', passport.authenticate('basic', { session: true }),
+	obtener
+	); 
 function obtener(req, res) {
 	var id = req.params.id;
      console.log(id);
@@ -212,6 +214,6 @@ function obtener(req, res) {
 			res.json(row); //esto faltaba
 			});
 	};
-});
+};
 
 module.exports = app;
