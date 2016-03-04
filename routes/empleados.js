@@ -160,7 +160,7 @@ app.get('/confirmar/:id', function (req, res) {
 			function (err, row) {
 				console.log(row.nombre + " " + row.apellido);
 				var onoff = obtenerBoleano2(row.acceso);
-                return row;
+               // return row;
 				res.render(__dirname + '/../views/borraremp.jade', { 'vector': row, 'onoff': onoff });
 			});
 	};
@@ -194,7 +194,7 @@ app.get('/nuevo', function (req, res) {
 	};
 });
 //get  api info
-app.get('/api/:id', passport.authenticate('basic', { session: true }),
+app.get('/app/:id', passport.authenticate('basic', { session: true }),
 function obtener(req, res) {
 	var id = req.params.id;
      console.log(id);
