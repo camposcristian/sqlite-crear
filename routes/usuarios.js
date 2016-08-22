@@ -6,7 +6,8 @@ var login = new sqlite3.Database('./database/Users.sqlite');
 
 router.get('/contrasena', function (req, res) {
 	var usuario = req.user.username;
-	res.render(__dirname + '/../views/contrasena.jade', { usuario: usuario });
+	var idEmpresa=req.user.idEmpresa;
+	res.render(__dirname + '/../views/contrasena.jade', { usuario: usuario,idEmpresa:idEmpresa });
 });
 
 router.get('/', function (req, res) {
@@ -21,6 +22,7 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
 	var responsable = req.user.username;
 	var username = req.body.username;
+	var idEmpresa= req.body.idEmpresa;
 	var id;
 	var password = req.body.password;
 	var password2 = req.body.password2;
@@ -53,11 +55,11 @@ function hashPassword(password, salt) {
 			var borrar = login.prepare("DELETE FROM users WHERE username=(?)");
 			borrar.run(username);
 			borrar.finalize();
-			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?,?,?,?)");
+			var insertar = login.prepare("INSERT INTO users VALUES (?,?,?,?,?,?,?)");
 			if(username===responsable){
-			insertar.run(id, username, hash, salt, admin, responsable);
+			insertar.run(id, username, hash, salt, admin, responsable,idEmpresa);
 			}else{
-			insertar.run(id, username, hash, salt, tipo, responsable);	
+			insertar.run(id, username, hash, salt, tipo, responsable,idEmpresa);	
 			};
 			insertar.finalize();
 			if (username===responsable){

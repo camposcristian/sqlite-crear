@@ -17,9 +17,9 @@ p Nombre:<input type="text" name="username"  required maxlength="20" class="nomd
 p Apellido:<input type="text" name="apellido"  required maxlength="20" class="nomdata" value=#{vector.apellido}>
 p C.I:<input type="text" name="ci" maxlength="16"  required class="cidata" value=#{vector.cedula} >
 p Fecha Nacimiento:<input type="date" name="nac" class="cidata" value=#{vector.fechanac} >
-p Empresa:<input type="text" name="empresa" maxlength="20"  required class="cidata" value=#{vector.empresa} >
+p Sub Empresa:<input type="text" name="empresa" maxlength="20"  required class="cidata" value=#{vector.subempresa} >
 p Departamento:<input type="text" name="dpto" maxlength="20"  required class="cidata" value=#{vector.dpto} >
-p Acceso:<input type="checkbox" name="acceso" #{onoff}>
+p Acceso:<input type="checkbox" name="acceso" #{onoff}> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  Marcar por Teclado:<input type="checkbox" name="teclado" #{onofftec}>
 br
 p <input type="submit" value="Grabar" class="btn">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" class="btn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=/./empleados class="btn">Cancelar</a>
 </form>

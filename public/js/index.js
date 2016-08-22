@@ -1,4 +1,5 @@
 $(document).ready(function() {
+   
 
 	/* Tabs Activiation
 	================================================== */
@@ -69,4 +70,5 @@ setTimeout(function() {
 $(".informe2").animate({
    'width':'0pt'
 	})},6000);
+
 });

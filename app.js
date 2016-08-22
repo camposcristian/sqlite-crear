@@ -10,6 +10,7 @@ var usuarios = require('./routes/usuarios');
 var empleados = require('./routes/empleados');
 var login = require('./routes/login');
 var exportar = require('./routes/exportar');
+var reg = require('./routes/reg');
 var cierresesion = require('./routes/cierresesion');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
@@ -54,12 +55,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-
 app.use('/usuarios', usuarios);
 app.use('/empleados', empleados);
 app.use('/login', login);
 app.use('/cierresesion', cierresesion);
 app.use('/exportar', exportar);
+app.use('/reg', reg);
 
 
 app.get('/', function (req, res) {

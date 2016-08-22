@@ -1,19 +1,21 @@
+<html>
 head 
+  link(rel="stylesheet", href="css/layout.css")
+  script(src='http://code.jquery.com/jquery-2.1.1.min.js')
+  link(rel='stylesheet', href='/css/tabla.css')
+  script(src="js/index.js")
+  script(type='text/javascript', src='/js/jquery.dataTables.min.js')
+  script(src='js/table.js')
  <!-- Stylesheets -->
-<link rel="stylesheet" href="css/layout.css">
 <body class="cuerpo">
 <div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<div class="enlace2"><a href=cierresesion>Cerrar Sesion</a></div></div>
-<a href="javascript:document.location.reload();"><i class="sprite sprite-actualizarclap"></i></a>
 <div class="imag"><img class="logo" src="../images/logocrear2.png">
 <div class="info">
 ul
- li <a href=/exportar class="enlace">Exportar por Fecha</a>
- br
- br
  li <a href=empleados/nuevo class="enlace">Nuevo Empleado</a>
  br
  br
- li <a href=/usuarios/contrasena class="enlace">Cambiar Contraseña</a>
+ li <a href=/usuarios/contrasena class="enlace">Admin. Contraseña</a>
  br
  br
  if admin==='admin'
@@ -22,57 +24,54 @@ ul
 br
 </div>
 </div>
-br
-br
 br 
 br
 br
-<div class="informe2"> <p class="informetext">#{nombre2}</p></div>
-<table class="tabla" border="solid">
-
-tr
-  <td class="id"> <h4> ID
-  td <h4> Nombre 
-  td <h4> Apellido
-  td <h4> Cedula
-  <td class="fecha">  <h4>fechanac
-  <td class="opciones"> <h4> Empresa
-  td <h4>Departamento
-  <td class="fecha">  <h4>Modificado
-  <td class="id"> <h4>Acceso
-  <td class="id"><h4>Huella
-  <td class="opciones"><h4>Opciones
-tr
-- for (var x = 0; x < max; x++)
-   <td class="id"> #{vector[x].id} 
-   <td> #{vector[x].nombre} 
-   <td> #{vector[x].apellido}
-   <td> #{vector[x].cedula}
-   <td class="fecha">  #{vector[x].fechanac}
-   <td class="opciones"> #{vector[x].empresa}
-   <td> #{vector[x].dpto}   
-   <td class="fecha">  #{vector[x].idusuario}  
-   if vector[x].acceso == "true"
-        <td class="id"> <input type="checkbox" name="acceso" checked="true" disabled /> 
-   else
-        <td class="id"> <input type="checkbox" name="acceso"  disabled /> 
-   if vector[x].huella===null||vector[x].huella==="Sin Enrolar"
-        <td class="id"> 
-   else
-        <td class="id"> <i class="sprite sprite-huellaclap"></i>   
-   <td class="opciones">
-   <a href=empleados/editar/#{vector[x].id}><i class="sprite sprite-editarclap"></i></a>&nbsp;
-   <a href=empleados/confirmar/#{vector[x].id}><i class="sprite sprite-borrarclap"></i></a>
-   if (x%2)==0
-    <tr class="par">   
-   else 
+div#marginbot
+ <a href="javascript:document.location.reload();" class="buttons buttons2" id="first-tab">Empleados</a>  
+ <a href="/reg" class="buttons" id="second-tab">Registraciones</a> 
+br
+hr
+table#tabla.display(cellspacing='0', width='100%')
+  thead
     tr
-</table>
-<p class="version"> Version: #{version}
-<!-- JS  -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
-<script>window.jQuery || document.write("<script src='js/jquery-1.5.1.min.js'>\x3C/script>")</script>
-<script src="js/index.js"></script>
-<!-- End Document -->
+      th Id
+      th Nombre
+      th Apellido
+      th Cedula
+      th Fecha Nacimiento
+      th Sub Empresa
+      th Departamento
+      th Fecha Modificacion
+      th Acceso
+      th Teclado
+      th Huellas
+      th Opciones
+  tbody
+   -for (var i = 0; i < max; ++i)
+     tr
+       td #{vector[i].id} 
+       td #{vector[i].nombre} 
+       td #{vector[i].apellido}
+       td #{vector[i].cedula}
+       td #{vector[i].fechanac}
+       td #{vector[i].subempresa}
+       td #{vector[i].dpto}
+       td #{vector[i].fechaact}
+       td #{vector[i].acceso}   
+       td #{vector[i].habkyb}
+       td 
+        if vector[i].huellac===null||vector[i].huellac==="Sin Enrolar"||vector[i].huellac===""
+          p Sin huella      
+        else 
+          p
+           i.sprite.sprite-huellaclap  
+       td
+        a(href='empleados/editar/#{vector[i].id}')
+         i.sprite.sprite-editarclap  
+        a(href='empleados/confirmar/#{vector[i].id}')
+         i.sprite.sprite-borrarclap
+
+
 
 

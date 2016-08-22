@@ -1,3 +1,7 @@
 module.exports = function boleano(valor) {
- return valor === "on"
+    if (valor) {
+        return "S";
+    } else {
+        return "N";
+    }
 };

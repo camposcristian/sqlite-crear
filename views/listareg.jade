@@ -1,0 +1,66 @@
+<html>
+head 
+  link(rel="stylesheet", href="css/layout.css")
+  script(src='http://code.jquery.com/jquery-2.1.1.min.js')
+  link(rel='stylesheet', href='/css/tabla.css')
+  script(src="js/index.js")
+  script(type='text/javascript', src='/js/jquery.dataTables.min.js')
+  script(src='js/table.js')
+ <!-- Stylesheets -->
+<body class="cuerpo">
+<div class="barra"><p class="bienvenido"> Hola #{user}! &nbsp;&nbsp;<div class="enlace2"><a href=cierresesion>Cerrar Sesion</a></div></div>
+<div class="imag"><img class="logo" src="../images/logocrear2.png">
+<div class="info">
+ul
+ li <a href=/exportar/ class="enlace">Generar Informes</a>
+ br
+ br
+ li <a href=/usuarios/contrasena class="enlace">Cambiar Contraseña</a>
+ br
+ br
+ if admin==='admin'
+  li <a href=/usuarios class="enlace">Nuevo Usuario</a>
+</ul>
+br
+</div>
+</div>
+br
+br 
+br
+div#marginbot
+ <a href="/empleados" class="buttons"  id="first-tab">Empleados</a>  
+ <a href="javascript:document.location.reload();" class="buttons buttons2" id="second-tab">Registraciones</a> 
+br
+hr
+table#tabla2.display(cellspacing='0', width='100%')
+  thead
+    tr
+      th Fecha
+      th Hora
+      th Id 
+      th Cedula
+      th Nombre
+      th Apellido
+      th Empresa
+      th Sub Empresa
+      th Equipo
+      th Metodo
+      th Tipo
+      th Acceso
+      th Observaciones
+  tbody
+   -for (var i = 0; i < max; ++i)
+     tr
+       td #{vector[i].fecha}
+       td #{vector[i].hora}
+       td #{vector[i].id} 
+       td #{vector[i].cedula}
+       td #{vector[i].nombre} 
+       td #{vector[i].apellido}
+       td #{vector[i].empresa}
+       td #{vector[i].subempresa}
+       td #{vector[i].equipo}   
+       td #{vector[i].mmark}    
+       td #{vector[i].marca} 
+       td #{vector[i].acceso} 
+       td #{vector[i].observaciones}

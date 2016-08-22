@@ -48,15 +48,11 @@ passport.use(new LocalStrategy(function (username, password, done) {
     });
   });
 }));
-
-
-
-
 passport.serializeUser(function (user, done) {
   return done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
-  db.get('SELECT id,admin, username FROM users WHERE id = ?', id, function (err, row) {
+  db.get('SELECT id,admin, username,idEmpresa FROM users WHERE id = ?', id, function (err, row) {
     if (!row) return done(null, false);
     return done(null, row);
   });
